@@ -7,15 +7,15 @@ use Livewire\Component;
 
 class Greeting extends Component
 {
-	public $user;
+    public $user;
 
-	public function mount()
-	{
-		$this->user = Auth::user();
-	}
+    public function mount()
+    {
+        $this->user = Auth::user();
+    }
 
-	public function render()
-	{
-		return view('livewire.greeting');
-	}
+    public function render()
+    {
+        return view('livewire.greeting');
+    }
 }
