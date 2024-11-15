@@ -17,4 +17,6 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/users', UsersPage::class)->name('users');
+
+    Route::get('/users/{user}', UsersPage::class);
 });
