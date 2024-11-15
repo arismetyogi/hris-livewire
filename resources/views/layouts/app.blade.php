@@ -37,7 +37,7 @@
         <div class="flex min-h-screen bg-gray-100">
             <livewire:app-sidebar />
             <div
-                class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden @if ($attributes['background']) {{
+                class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden  @if ($attributes['background']) {{
                     $attributes['background']
                 }} @endif"
                 x-ref="contentarea"
