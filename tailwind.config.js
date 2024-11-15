@@ -22,11 +22,13 @@ export default {
 				colors: {
 					transparent: 'transparent',
 					current: 'currentColor',
+					primary: colors.amber,
+					secondary: colors.emerald,
 					black: colors.black,
 					white: colors.white,
 					gray: colors.trueGray,
-					indigo: colors.cyan,
 					red: colors.rose,
+					indigo: colors.indigo,
 					yellow: colors.amber,
 				}
     },
