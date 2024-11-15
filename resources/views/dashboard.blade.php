@@ -11,7 +11,7 @@
                 <livewire:greeting />
             </div>
             <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
-                Test
+                <div class="text-indigo-500">Dashboard</div>
             </div>
         </div>
     </div>

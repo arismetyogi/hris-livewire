@@ -13,28 +13,53 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+
+    <body
+        class="antialiased text-gray-600 bg-gray-100 font-inter dark:bg-gray-900 dark:text-gray-400"
+        :class="{ 'sidebar-expanded': sidebarExpanded }"
+        x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
+        x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))"
+    >
+        <script>
+            if (localStorage.getItem("sidebar-expanded") == "true") {
+                document
+                    .querySelector("body")
+                    .classList.add("sidebar-expanded");
+            } else {
+                document
+                    .querySelector("body")
+                    .classList.remove("sidebar-expanded");
+            }
+        </script>
+
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            <livewire:navigation-menu />
+        <div class="flex min-h-screen bg-gray-100">
+            @include('components.apps.sidebar')
+            <div
+                class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden @if ($attributes['background']) {{
+                    $attributes['background']
+                }} @endif"
+                x-ref="contentarea"
+            >
+                <livewire:navigation-menu />
 
-            <!-- Page Heading -->
-            @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-            @endif
+                <!-- Page Heading -->
+                @if (isset($header))
+                <header class="bg-white shadow">
+                    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+                @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <!-- Page Content -->
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
 
-        @stack('modals')
-        @livewireScripts
+        @stack('modals') @livewireScripts
     </body>
 </html>
