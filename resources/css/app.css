@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Additional styles */
-@import "additional-styles/utility-patterns.css";
-
 [x-cloak] {
     display: none;
 }

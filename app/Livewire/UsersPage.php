@@ -5,14 +5,41 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Title('Users')]
 class UsersPage extends Component
 {
-    public User $user; // shorthand for mount function
+    use WithPagination;
+    // public User $user; // shorthand for mount function
 
+    public $search='';
+    public function updatedSearch()
+    {
+      $this->resetPage();
+    }
+    public function setSortBy($sortByCol)
+    {
+      // $this->sortDir = 'ASC';
+    //   if ($this->sortBy = $sortByCol) {
+    //     $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
+    //   }
+    //   $this->sortBy = $sortByCol;
+    }
     public function render()
     {
-        return view('livewire.users-page');
+        $users = User::where(function ($query) {
+            // Apply search conditions for first_name, last_name, and email
+            $query
+              ->where('username', 'like', '%' . $this->search . '%')
+              ->orWhere('first_name', 'like', '%' . $this->search . '%')
+              ->orWhere('last_name', 'like', '%' . $this->search . '%')
+              ->orWhere('email', 'like', '%' . $this->search . '%');
+          })
+        ->paginate(5);
+
+        return view('livewire.users-page', [
+            'users' => $users
+        ]);
     }
 }
