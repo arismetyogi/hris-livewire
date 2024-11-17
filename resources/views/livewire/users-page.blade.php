@@ -152,8 +152,8 @@
                     >
                         <img
                             class="w-10 h-10 rounded-full"
-                            src="/docs/images/people/profile-picture-1.jpg"
-                            alt="{{ $user->username }}}}"
+                            src="{{ $user->profile_photo_url }}"
+                            alt="{{ $user->username }}"
                         />
                         <div class="ps-3">
                             <div class="text-base font-semibold">{{ $user->first_name . ' ' . $user->last_name }}</div>
