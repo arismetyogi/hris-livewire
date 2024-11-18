@@ -37,12 +37,14 @@
         <div class="flex min-h-screen bg-gray-100">
             <livewire:app-sidebar />
             <div
-                class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden  @if ($attributes['background']) {{
+                class="relative flex flex-col flex-1 @if ($attributes['background']) {{
                     $attributes['background']
                 }} @endif"
                 x-ref="contentarea"
             >
-                <livewire:navigation-menu />
+                <livewire:navigation-menu
+                    class="sticky top-0 z-50 bg-white shadow"
+                />
 
                 <!-- Page Heading -->
                 @if (isset($header))

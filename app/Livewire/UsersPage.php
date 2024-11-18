@@ -13,30 +13,31 @@ class UsersPage extends Component
     use WithPagination;
     // public User $user; // shorthand for mount function
 
-    public $search='';
+    public $search = '';
+    public $perPage = '5';
     public function updatedSearch()
     {
-      $this->resetPage();
+        $this->resetPage();
     }
     public function setSortBy($sortByCol)
     {
-      // $this->sortDir = 'ASC';
-    //   if ($this->sortBy = $sortByCol) {
-    //     $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
-    //   }
-    //   $this->sortBy = $sortByCol;
+        // $this->sortDir = 'ASC';
+        //   if ($this->sortBy = $sortByCol) {
+        //     $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
+        //   }
+        //   $this->sortBy = $sortByCol;
     }
     public function render()
     {
         $users = User::where(function ($query) {
             // Apply search conditions for first_name, last_name, and email
             $query
-              ->where('username', 'like', '%' . $this->search . '%')
-              ->orWhere('first_name', 'like', '%' . $this->search . '%')
-              ->orWhere('last_name', 'like', '%' . $this->search . '%')
-              ->orWhere('email', 'like', '%' . $this->search . '%');
-          })
-        ->paginate(5);
+                ->where('username', 'like', '%' . $this->search . '%')
+                ->orWhere('first_name', 'like', '%' . $this->search . '%')
+                ->orWhere('last_name', 'like', '%' . $this->search . '%')
+                ->orWhere('email', 'like', '%' . $this->search . '%');
+        })
+            ->paginate($this->perPage);
 
         return view('livewire.users-page', [
             'users' => $users

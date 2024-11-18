@@ -124,11 +124,24 @@
             </tbody>
         </table>
 
-        <div>
-            {{ $users->links() }}
+        <div class="flex flex-wrap items-center justify-between py-12 space-y-4 flex-column md:flex-row md:space-y-0">
+            <div wire:model.live="perPage">
+                <label for="perPage">per Page:</label>
+                <input type="button" name="perPage" id="perPage">
+                <select class="border-gray-300 rounded">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div>
+                {{ $users->links() }}
+            </div>
         </div>
         <!-- Edit user modal -->
-        <div id="editUserModal" tabindex="-1" aria-hidden="true"
+        <div id=" editUserModal" tabindex="-1" aria-hidden="true"
             class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
