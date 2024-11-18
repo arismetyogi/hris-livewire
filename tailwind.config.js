@@ -37,6 +37,7 @@ export default {
     plugins: [
         forms,
         typography,
+        require("flowbite/plugin"),
         // add custom variant for expanding sidebar
         plugin(({ addVariant, e }) => {
             addVariant("sidebar-expanded", ({ modifySelectors, separator }) => {
