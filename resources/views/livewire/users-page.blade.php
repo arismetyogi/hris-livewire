@@ -68,74 +68,74 @@
                         </div>
                     </th>
                     @include('livewire.includes.th-with-sort', [
-    'name' => 'users.first_name',
-    'displayName' => 'name'
-])
+                    'name' => 'users.first_name',
+                    'displayName' => 'name'
+                    ])
                     @include('livewire.includes.th-no-sort', [
-    'name' => 'role'
-])
+                    'name' => 'role'
+                    ])
                     @include('livewire.includes.th-no-sort', [
-    'name' => 'status'
-])
+                    'name' => 'status'
+                    ])
                     @include('livewire.includes.th-with-sort', [
-    'name' => 'users.updated_at',
-    'displayName' => 'last update'
-])
+                    'name' => 'users.updated_at',
+                    'displayName' => 'last update'
+                    ])
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($users as $user)
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="w-4 p-4">
-                            <div class="flex items-center">
-                                <input id="checkbox-table-search-1" type="checkbox"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="w-4 p-4">
+                        <div class="flex items-center">
+                            <input id="checkbox-table-search-1" type="checkbox"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                        <img class="w-10 h-10 rounded-full" src="{{ $user->profile_photo_url }}"
+                            alt="{{ $user->username }}" />
+                        <div class="ps-3">
+                            <div class="text-base font-semibold">{{ $user->first_name . ' ' . $user->last_name }}</div>
+                            <div class="font-normal text-gray-500">
+                                {{ $user->email }}
                             </div>
-                        </td>
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="{{ $user->profile_photo_url }}"
-                                alt="{{ $user->username }}" />
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">{{ $user->first_name . ' ' . $user->last_name }}</div>
-                                <div class="font-normal text-gray-500">
-                                    {{ $user->email }}
-                                </div>
-                            </div>
-                        </th>
-                        <!-- Role -->
-                        <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                {{ $user->email_verified_at }}
-                            </div>
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                {{ 'online status' }}
-                            </div>
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                {{ $user->updated_at->diffForHumans() }}
-                            </div>
-                        </td>
-                        <td class="px-6 py-4">
-                            <!-- Modal toggle -->
-                            <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-                        </td>
-                    </tr>
+                        </div>
+                    </th>
+                    <!-- Role -->
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            {{ $user->email_verified_at }}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                            {{ 'online status' }}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            {{ $user->updated_at->diffForHumans() }}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <!-- Modal toggle -->
+                        <button data-modal-target="editUserModal" data-modal-toggle="editUserModal"
+                            data-modal-show="editUserModal"
+                            class="px-2 py-1 font-medium text-white rounded-lg dark:text-blue-500 hover:underline bg-primary-300">Edit
+                            user</button>
+                    </td>
+                </tr>
                 @empty
-                    <trclass="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50
-                        dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">No Users Found!</td>
-                        </tr>
-                @endforelse
+                <trclass="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50
+                    dark:hover:bg-gray-600">
+                    <td class="px-6 py-4">No Users Found!</td>
+                    </tr>
+                    @endforelse
 
             </tbody>
         </table>
@@ -146,9 +146,6 @@
                 <select class="border-gray-300 rounded">
                     <option value="5">5</option>
                     <option value="10">10</option>
-                    <!-- <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option> -->
                 </select>
             </div>
             <div>
@@ -156,7 +153,7 @@
             </div>
         </div>
         <!-- Edit user modal -->
-        <div id=" editUserModal" tabindex="-1" aria-hidden="true"
+        <div id="editUserModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
             class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
@@ -211,26 +208,11 @@
                                     placeholder="example@company.com" required="" />
                             </div>
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="phone-number"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
-                                    Number</label>
-                                <input type="number" name="phone-number" id="phone-number"
-                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="e.g. +(12)3456 789" required="" />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
                                 <label for="department"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
                                 <input type="text" name="department" id="department"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Development" required="" />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="company"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                                <input type="number" name="company" id="company"
-                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="123456" required="" />
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="current-password"
@@ -255,7 +237,7 @@
                         class="flex items-center p-6 space-x-3 border-t border-gray-200 rounded-b rtl:space-x-reverse dark:border-gray-600">
                         <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Save all
+                            Save
                         </button>
                     </div>
                 </form>
