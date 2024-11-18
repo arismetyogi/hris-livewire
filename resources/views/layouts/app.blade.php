@@ -20,17 +20,6 @@
         x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
         x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))"
     >
-        <script>
-            if (localStorage.getItem("sidebar-expanded") == "true") {
-                document
-                    .querySelector("body")
-                    .classList.add("sidebar-expanded");
-            } else {
-                document
-                    .querySelector("body")
-                    .classList.remove("sidebar-expanded");
-            }
-        </script>
 
         <x-banner />
 
@@ -63,5 +52,17 @@
         </div>
 
         @stack('modals') @livewireScripts
+        <script>
+            if (localStorage.getItem("sidebar-expanded") == "true") {
+                document
+                    .querySelector("body")
+                    .classList.add("sidebar-expanded");
+            } else {
+                document
+                    .querySelector("body")
+                    .classList.remove("sidebar-expanded");
+            }
+        </script>
+
     </body>
 </html>

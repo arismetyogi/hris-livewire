@@ -67,10 +67,20 @@
                             <label for="checkbox-all-search" class="sr-only">checkbox</label>
                         </div>
                     </th>
-                    <th scope="col" class="px-6 py-3">Name</th>
-                    <!-- <th scope="col" class="px-6 py-3">Position</th> -->
-                    <th scope="col" class="px-6 py-3">Role</th>
-                    <th scope="col" class="px-6 py-3">Status</th>
+                    @include('livewire.includes.th-with-sort', [
+    'name' => 'users.first_name',
+    'displayName' => 'name'
+])
+                    @include('livewire.includes.th-no-sort', [
+    'name' => 'role'
+])
+                    @include('livewire.includes.th-no-sort', [
+    'name' => 'status'
+])
+                    @include('livewire.includes.th-with-sort', [
+    'name' => 'users.updated_at',
+    'displayName' => 'last update'
+])
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
@@ -109,6 +119,12 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                                {{ $user->updated_at->diffForHumans() }}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
                             <!-- Modal toggle -->
                             <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
@@ -127,13 +143,12 @@
         <div class="flex flex-wrap items-center justify-between py-12 space-y-4 flex-column md:flex-row md:space-y-0">
             <div wire:model.live="perPage">
                 <label for="perPage">per Page:</label>
-                <input type="button" name="perPage" id="perPage">
                 <select class="border-gray-300 rounded">
                     <option value="5">5</option>
                     <option value="10">10</option>
-                    <option value="20">20</option>
+                    <!-- <option value="20">20</option>
                     <option value="50">50</option>
-                    <option value="100">100</option>
+                    <option value="100">100</option> -->
                 </select>
             </div>
             <div>

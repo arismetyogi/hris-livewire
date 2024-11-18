@@ -15,28 +15,29 @@ class UsersPage extends Component
 
     public $search = '';
     public $perPage = '5';
+    public $sortBy = 'users.updated_at';
+    public $sortDir = 'ASC';
     public function updatedSearch()
     {
         $this->resetPage();
     }
     public function setSortBy($sortByCol)
     {
-        // $this->sortDir = 'ASC';
-        //   if ($this->sortBy = $sortByCol) {
-        //     $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
-        //   }
-        //   $this->sortBy = $sortByCol;
+        if ($this->sortBy = $sortByCol) {
+            $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
+        }
+        $this->sortBy = $sortByCol;
     }
     public function render()
     {
         $users = User::where(function ($query) {
             // Apply search conditions for first_name, last_name, and email
             $query
-                ->where('username', 'like', '%' . $this->search . '%')
                 ->orWhere('first_name', 'like', '%' . $this->search . '%')
                 ->orWhere('last_name', 'like', '%' . $this->search . '%')
                 ->orWhere('email', 'like', '%' . $this->search . '%');
         })
+            ->orderBy($this->sortBy, $this->sortDir)
             ->paginate($this->perPage);
 
         return view('livewire.users-page', [
