@@ -6,4 +6,7 @@ import "./bootstrap";
 
 import "flowbite";
 
-import toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
+import Toastify from "toastify-js";
+
+window.Toastify = Toastify;
