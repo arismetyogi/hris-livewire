@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use App\Livewire\Forms\UserForm;
+use App\Livewire\UsersPage;
 use Livewire\Component;
 
 class Create extends Component
@@ -19,6 +20,8 @@ class Create extends Component
             ? $this->dispatch('notify', title: 'success', message: 'Data berhasil disimpan')
             : $this->dispatch('notify', title: 'failed', message: 'Data gagal disimpan!');
         $this->createUserModal = false;
+        // refresh Users Page after saving
+        $this->dispatch('dispatch-user.create-save')->to(UsersPage::class);
     }
 
     public function render()
