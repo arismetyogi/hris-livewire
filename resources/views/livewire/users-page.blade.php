@@ -24,16 +24,8 @@
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
                         <li>
                             <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate
-                                account</a>
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Export
+                                Data</a>
                         </li>
                     </ul>
                     <div class="py-1">
@@ -114,7 +106,7 @@
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                            {{ 'online status' }}
+                            {{ 'online' }}
                         </div>
                     </td>
                     <td class="px-6 py-4">
