@@ -2,6 +2,8 @@ import defaultTheme from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
 import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
+import "toastify-js/src/toastify.css";
+
 const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
