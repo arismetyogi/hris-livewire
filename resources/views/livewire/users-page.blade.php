@@ -106,7 +106,7 @@
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                            {{ 'online' }}
+                            {{ 'online status' }}
                         </div>
                     </td>
                     <td class="px-6 py-4">
@@ -116,10 +116,10 @@
                     </td>
                     <td class="px-6 py-4">
                         <!-- Modal toggle -->
-                        <button data-modal-target="editUserModal" data-modal-toggle="editUserModal"
-                            data-modal-show="editUserModal"
-                            class="px-2 py-1 font-medium text-white rounded-lg dark:text-blue-500 hover:underline bg-primary-300">Edit
-                            user</button>
+                        <x-button data-modal-target="editUserModal" data-modal-toggle="editUserModal"
+                            data-modal-show="editUserModal" class="tracking-widest bg-orange-500 hover:bg-orange-400">
+                            󰚼</x-button>
+                        <x-danger-button wire:click='confirmUserDeletion({{ $user->id }})'>󰗨</x-danger-button>
                     </td>
                 </tr>
                 @empty
@@ -144,6 +144,27 @@
                 {{ $users->links() }}
             </div>
         </div>
+        <!-- Delete User Modal -->
+        <x-dialog-modal wire:model.live="confirmingUserDeletion">
+            <x-slot name="title">
+                {{ __('Delete Account') }}
+            </x-slot>
+
+            <x-slot name="content">
+                {{ __('Are you sure you want to permanently delete this account?') }}
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-secondary-button wire:click="set('confirmingUserDeletion', false)" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+
+                <x-danger-button class="ms-3" wire:click="deleteUser({{ $confirmingUserDeletion }})"
+                    wire:loading.attr="disabled">
+                    {{ __('Delete Account') }}
+                </x-danger-button>
+            </x-slot>
+        </x-dialog-modal>
         <!-- Edit user modal -->
         <div id="editUserModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
             class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -205,22 +226,6 @@
                                 <input type="text" name="department" id="department"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Development" required="" />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="current-password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current
-                                    Password</label>
-                                <input type="password" name="current-password" id="current-password"
-                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="••••••••" required="" />
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="new-password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New
-                                    Password</label>
-                                <input type="password" name="new-password" id="new-password"
-                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="••••••••" required="" />
                             </div>
                         </div>
                     </div>

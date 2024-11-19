@@ -17,6 +17,8 @@ class UsersPage extends Component
     public $perPage = '5';
     public $sortBy = 'users.updated_at';
     public $sortDir = 'ASC';
+    public $confirmingUserDeletion = false;
+    public $confirmingUserAddition = false;
     public function updatedSearch()
     {
         $this->resetPage();
@@ -43,5 +45,17 @@ class UsersPage extends Component
         return view('livewire.users-page', [
             'users' => $users
         ]);
+    }
+
+    public function confirmUserDeletion($id)
+    {
+        $this->confirmingUserDeletion = $id;
+        // $user->delete();
+    }
+
+    public function deleteUser(User $user)
+    {
+        $user->delete();
+        $this->confirmingUserDeletion = false;
     }
 }
