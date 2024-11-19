@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Traits\WithSorting;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -14,6 +15,7 @@ use Livewire\WithPagination;
 class UsersPage extends Component
 {
     use WithPagination;
+    use WithSorting;
 
     public
     $search = '',
