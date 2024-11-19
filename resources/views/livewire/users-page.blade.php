@@ -34,6 +34,21 @@
                             User</a>
                     </div>
                 </div>
+                <x-secondary-button @click="$dispatch('notify', {title: 'sending notification'})">click
+                </x-secondary-button>
+                <div x-data='{open: false}' x-show='open' @notify.window='Toastify({
+                        text: "This is a toast",
+                        duration: 2000,
+                        newWindow: true,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)" ,
+                            },
+                        }).showToast();'>
+                </div>
             </div>
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative">
