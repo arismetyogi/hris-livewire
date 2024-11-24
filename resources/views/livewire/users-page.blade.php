@@ -118,8 +118,8 @@
                     </td>
                     <td class="px-6 py-4">
                         <!-- Modal toggle -->
-                        <x-button class="tracking-widest bg-orange-500 hover:bg-orange-400">󰚼</x-button>
-                        <x-danger-button wire:click='confirmUserDeletion({{ $user->id }})'>󰗨</x-danger-button>
+{{--                        <x-button class="tracking-widest bg-orange-500 hover:bg-orange-400">󰚼</x-button>--}}
+                        <x-danger-button wire:click='confirmUserDeletion({{ $user->id }})'>{{ svg('fluentui-person-delete-16-o') }}</x-danger-button>
                     </td>
                 </tr>
                 @empty
