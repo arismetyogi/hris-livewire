@@ -17,26 +17,29 @@ class UsersPage extends Component
     use WithPagination;
 
     public
-    $search = '',
-    $perPage = '5',
-    $sortBy = 'users.updated_at',
-    $sortDir = 'DESC',
-    $confirmingUserDeletion = false,
-    $confirmingUserAddition = false;
-    public function updatedSearch()
+        $search = '',
+        $perPage = '5',
+        $sortBy = 'users.updated_at',
+        $sortDir = 'DESC',
+        $confirmingUserDeletion = false,
+        $confirmingUserAddition = false;
+
+    public function updatedSearch(): void
     {
         $this->resetPage();
     }
-    public function setSortBy($sortByCol)
+
+    public function setSortBy($sortByCol): void
     {
         if ($this->sortBy = $sortByCol) {
             $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
         }
         $this->sortBy = $sortByCol;
     }
+
     public function render()
     {
-        $users = User::where(function ($query) {
+        $users = User::with('department')->where(function ($query) {
             // Apply search conditions for first_name, last_name, and email
             $query
                 ->orWhere('first_name', 'like', '%' . $this->search . '%')

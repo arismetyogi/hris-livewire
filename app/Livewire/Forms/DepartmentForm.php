@@ -10,14 +10,14 @@ class DepartmentForm extends Form
 {
     public ?Department $department;
 
-    #[Validate('unique:', as: 'Department ID')]
+    #[Validate('unique:departments', as: 'Department ID')]
     public $id;
-    #[Validate('name', as: 'Department Name')]
+    #[Validate('unique:departments|string|min:3', as: 'Department Name')]
     public $name;
 
     public function setDepartment(Department $department)
     {
-        $this->department = $this->department ?? new Department();
+        $this->department = $department;
 
         $this->id = $department->id;
         $this->name = $department->name;

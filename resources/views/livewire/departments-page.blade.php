@@ -31,7 +31,7 @@
                     <div class="py-1">
                         <a href="#"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete
-                            User</a>
+                            Selected</a>
                     </div>
                 </div>
 
@@ -62,16 +62,15 @@
                     </div>
                 </th>
                 @include('livewire.includes.th-no-sort', [
-                'name' => 'departments.id',
-                'displayName' => 'department id'
+                'name' => 'departments id'
                 ])
                 @include('livewire.includes.th-with-sort', [
                 'name' => 'departments.name',
                 'displayName' => 'department name'
                 ])
                 @include('livewire.includes.th-with-sort', [
-                'name' => 'users.updated_at',
-                'displayName' => 'last update'
+                'name' => '$departments.updated_at',
+                'displayName' => 'last updated'
                 ])
                 <th scope="col" class="px-6 py-3">Action</th>
             </tr>
@@ -87,6 +86,12 @@
                             <label for="checkbox-table-search-{{ $department->id }}" class="sr-only">checkbox</label>
                         </div>
                     </td>
+                    <!-- Dept ID -->
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            {{ $department->id }}
+                        </div>
+                    </td>
                     <!-- Dept Name -->
                     <td class="px-6 py-4">
                         <div class="flex items-center">
@@ -95,22 +100,24 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center">
-                            {{ $user->updated_at->diffForHumans() }}
+                            {{ $department->updated_at->diffForHumans() }}
                         </div>
                     </td>
                     <td class="px-6 py-4">
                         <!-- Modal toggle -->
-                        <x-button class="tracking-widest bg-orange-500 hover:bg-orange-400">󰚼</x-button>
-                        <x-danger-button wire:click='confirmUserDeletion({{ $department->id }})'>
+                        <x-button class="tracking-widest bg-orange-500 hover:bg-orange-400">
+                            <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
+                        </x-button>
+                        <x-danger-button wire:click='confirmDepartmentDeletion({{ $department->id }})'>
                             <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
                             delete
                         </x-danger-button>
                     </td>
                 </tr>
             @empty
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 col-span-full
                 dark:hover:bg-gray-600">
-                    <td class="px-6 py-4">No Users Found!</td>
+                    <td class="px-6 py-4">No Department Found!</td>
                 </tr>
             @endforelse
 
@@ -130,23 +137,24 @@
             </div>
         </div>
         <!-- Delete User Modal -->
-        <x-dialog-modal wire:model.live="confirmingUserDeletion">
+        <x-dialog-modal wire:model.live="confirmingDepartmentDeletion">
             <x-slot name="title">
-                {{ __('Delete Account') }}
+                {{ __('Delete Department') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Are you sure you want to permanently delete this account?') }}
+                {{ __('Are you sure you want to permanently delete this department?') }}
             </x-slot>
 
             <x-slot name="footer">
-                <x-secondary-button wire:click="set('confirmingUserDeletion', false)" wire:loading.attr="disabled">
+                <x-secondary-button wire:click="set('confirmingDepartmentDeletion', false)"
+                                    wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ms-3" wire:click="deleteUser({{ $confirmingUserDeletion }})"
+                <x-danger-button class="ms-3" wire:click="deleteDepartment({{ $confirmingDepartmentDeletion }})"
                                  wire:loading.attr="disabled">
-                    {{ __('Delete Account') }}
+                    {{ __('Delete Department') }}
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>

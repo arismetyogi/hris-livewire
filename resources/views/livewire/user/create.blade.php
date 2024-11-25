@@ -39,12 +39,12 @@
                 </div>
                 <!-- Department -->
                 <div class="col-span-full">
-                    <x-label for="form.department" value="{{ __('Department') }}"/>
-                    <x-input id="form.department" type="text" class="block w-full mt-1"
-                             wire:model="form.department"
+                    <x-label for="form.department_id" value="{{ __('Department') }}"/>
+                    <x-input id="form.department_id" type="text" class="block w-full mt-1"
+                             wire:model="form.department_id"
                              required
-                             autocomplete="user.department"/>
-                    <x-input-error for="form.department" class="mt-2"/>
+                             autocomplete="user.department_id"/>
+                    <x-input-error for="form.department_id" class="mt-2"/>
                 </div>
 
                 <!-- Password -->

@@ -15,7 +15,7 @@
                     <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="m1 1 4 4 4-4" />
+                              d="m1 1 4 4 4-4"/>
                     </svg>
                 </button>
                 <!-- Dropdown menu -->
@@ -41,15 +41,15 @@
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
                     <input wire:model.live.debounce.350="search" type="text" id="table-search"
                            class="block pt-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Search for users" />
+                           placeholder="Search for users"/>
                 </div>
             </div>
-            <livewire:user.create />
+            <livewire:user.create/>
         </div>
         <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -57,13 +57,17 @@
                 <th scope="col" class="p-4">
                     <div class="flex items-center">
                         <input id="checkbox-all-search" type="checkbox"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                         <label for="checkbox-all-search" class="sr-only">checkbox</label>
                     </div>
                 </th>
                 @include('livewire.includes.th-with-sort', [
                 'name' => 'users.first_name',
                 'displayName' => 'name'
+                ])
+                @include('livewire.includes.th-with-sort', [
+                'name' => 'users.department_id',
+                'displayName' => 'department'
                 ])
                 @include('livewire.includes.th-no-sort', [
                 'name' => 'role'
@@ -85,13 +89,13 @@
                     <td class="w-4 p-4">
                         <div class="flex items-center">
                             <input id="checkbox-table-search-{{ $user->id }}" type="checkbox"
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                             <label for="checkbox-table-search-{{ $user->id }}" class="sr-only">checkbox</label>
                         </div>
                     </td>
                     <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <img class="w-10 h-10 rounded-full" src="{{ $user->profile_photo_url }}"
-                             alt="{{ $user->username }}" />
+                             alt="{{ $user->username }}"/>
                         <div class="ps-3">
                             <div class="text-base font-semibold">{{ $user->first_name . ' ' . $user->last_name }}</div>
                             <div class="font-normal text-gray-500">
@@ -99,6 +103,12 @@
                             </div>
                         </div>
                     </th>
+                    <!-- Department -->
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            {{ $user->department ? $user->department->name : null }}
+                        </div>
+                    </td>
                     <!-- Role -->
                     <td class="px-6 py-4">
                         <div class="flex items-center">
@@ -120,7 +130,8 @@
                         <!-- Modal toggle -->
                         {{--                        <x-button class="tracking-widest bg-orange-500 hover:bg-orange-400">󰚼</x-button>--}}
                         <x-danger-button wire:click='confirmUserDeletion({{ $user->id }})'>
-                            <x-heroicon-c-user-minus class="h-4 w-4 text-white"/> delete
+                            <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
+                            delete
                         </x-danger-button>
                     </td>
                 </tr>
