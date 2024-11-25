@@ -15,7 +15,6 @@ use Livewire\WithPagination;
 class UsersPage extends Component
 {
     use WithPagination;
-    use WithSorting;
 
     public
     $search = '',
