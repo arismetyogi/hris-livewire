@@ -19,4 +19,6 @@ Route::middleware([
     Route::get('/users', UsersPage::class)->name('users');
 
     Route::get('/users/{user}', UsersPage::class);
+
+    Route::get('/departments', \App\Livewire\DepartmentsPage::class)->name('departments');
 });
