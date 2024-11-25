@@ -1,6 +1,5 @@
 <div>
-    <x-button @click="$wire.set('createDepartmentModal','true')">Add New Department</x-button>
-    <x-dialog-modal id="createDepartmentModal" wire:model.live="createDepartmentModal" submit="save">
+    <x-dialog-modal id="editDepartmentModal" wire:model.live="editDepartmentModal" submit="edit">
         <x-slot name="title">
             {{ $formTitle }}
         </x-slot>
@@ -27,7 +26,7 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="set('createDepartmentModal', false)" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="set('editDepartmentModal', false)" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-secondary-button>
             <x-button class="ms-3" wire:loading.attr="disabled">

@@ -40,11 +40,14 @@
                 <!-- Department -->
                 <div class="col-span-full">
                     <x-label for="form.department_id" value="{{ __('Department') }}"/>
-                    <x-input id="form.department_id" type="text" class="block w-full mt-1"
-                             wire:model="form.department_id"
-                             required
-                             autocomplete="user.department_id"/>
-                    <x-input-error for="form.department_id" class="mt-2"/>
+                    <select class="block w-full mt-1"
+                            wire:model="form.department_id"
+                            required>
+                        <option disabled value="">Select Department</option>
+                        @foreach(\App\Models\Department::all() as $department)
+                            <option value="{{ $department->id}}">{{ $department->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Password -->

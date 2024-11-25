@@ -69,7 +69,7 @@
                 'displayName' => 'department name'
                 ])
                 @include('livewire.includes.th-with-sort', [
-                'name' => '$departments.updated_at',
+                'name' => 'departments.updated_at',
                 'displayName' => 'last updated'
                 ])
                 <th scope="col" class="px-6 py-3">Action</th>
@@ -105,7 +105,10 @@
                     </td>
                     <td class="px-6 py-4">
                         <!-- Modal toggle -->
-                        <x-button class="tracking-widest bg-orange-500 hover:bg-orange-400">
+                        <x-button
+                            wire:click.prevent="$dispatch('dispatch-edit-department', {departmentId: {{$department->id}})"
+                            type="button"
+                            class="tracking-widest bg-orange-500 hover:bg-orange-400">
                             <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
                         </x-button>
                         <x-danger-button wire:click='confirmDepartmentDeletion({{ $department->id }})'>
