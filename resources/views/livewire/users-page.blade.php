@@ -237,14 +237,14 @@
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="form.password" value="{{ __('Password') }}"/>
                         <x-input id="form.password" type="password" class="block w-full mt-1" wire:model="form.password"
-                                 required/>
+                                 required autocomplete="new-password"/>
                         <x-input-error for="form.password" class="mt-2"/>
                     </div>
 
                     <!-- Password Confirmation -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="form.password_confirmation" value="{{ __('Password Confirmation') }}"/>
-                        <x-input id="form.password_confirmation" type="password" class="block w-full mt-1" required/>
+                        <x-input id="form.password_confirmation" type="password" class="block w-full mt-1" wire:model="form.password_confirmation" required/>
                         <x-input-error for="form.password_confirmation" class="mt-2"/>
                     </div>
                 </div>

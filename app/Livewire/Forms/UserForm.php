@@ -22,9 +22,10 @@ class UserForm extends Form
 //    #[Validate('required|email|unique:users,email,' . $id . '|min:6', as: 'Email')]
     public $email;
 //    #[Validate('required', as: 'Department')]
-    public $department_id;
+    public $department_id="";
 //    #[Validate('required|min:8', as: 'Password')]
-    public $password;
+    public $password="";
+    public $password_confirmation="";
 
     public function rules(): array
     {
@@ -39,6 +40,7 @@ class UserForm extends Form
             'last_name' => ['nullable', 'min:3'],
             'department_id' => ['nullable', 'numeric', 'exists:departments,id'],
             'password' => ['required', 'min:8'],
+            'password_confirmation' => ['required', 'same:password'],
         ];
     }
 

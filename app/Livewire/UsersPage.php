@@ -73,6 +73,8 @@ class UsersPage extends Component
     public function editUser(User $id): void
     {
         $this->form->setUser($id);
+        $this->form->password = '';
+        $this->form->password_confirmation = '';
         $this->editUserModal = true;
     }
 
