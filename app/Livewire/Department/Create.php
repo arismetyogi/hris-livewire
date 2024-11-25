@@ -4,6 +4,7 @@ namespace App\Livewire\Department;
 
 use App\Livewire\DepartmentsPage;
 use App\Livewire\Forms\DepartmentForm;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class Create extends Component
@@ -12,7 +13,7 @@ class Create extends Component
     public $createDepartmentModal = false;
     public $formTitle = 'Add a New Department';
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
         // panggil method store dari DepartmentForm
@@ -26,7 +27,7 @@ class Create extends Component
         $this->dispatch('dispatch-department.create-save')->to(DepartmentsPage::class);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.department.create');
     }

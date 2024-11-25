@@ -12,10 +12,10 @@ class DepartmentForm extends Form
 
     #[Validate('unique:departments', as: 'Department ID')]
     public $id;
-    #[Validate('unique:departments|string|min:3', as: 'Department Name')]
+    #[Validate('string|min:3', as: 'Department Name')]
     public $name;
 
-    public function setDepartment(Department $department)
+    public function setDepartment(Department $department): void
     {
         $this->department = $department;
 
@@ -23,13 +23,13 @@ class DepartmentForm extends Form
         $this->name = $department->name;
     }
 
-    public function store()
+    public function store(): void
     {
         Department::create($this->except(['department']));
         $this->reset();
     }
 
-    public function update()
+    public function update(): void
     {
         $this->department->update($this->except(['department']));
     }

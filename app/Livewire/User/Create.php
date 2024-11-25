@@ -4,14 +4,11 @@ namespace App\Livewire\User;
 
 use App\Livewire\Forms\UserForm;
 use App\Livewire\UsersPage;
-use App\Models\Department;
 use Livewire\Component;
 
 class Create extends Component
 {
     public UserForm $form;
-
-    public $departments;
     public $createUserModal = false;
     public $formTitle = 'Create a New User';
 
@@ -31,8 +28,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.user.create', [
-            'departments' => Department::all(),
-        ]);
+        return view('livewire.user.create');
     }
 }

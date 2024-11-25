@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\DepartmentForm;
 use App\Models\Department;
+use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,20 +18,23 @@ class DepartmentsPage extends Component
 {
     use WithPagination;
 
+    public DepartmentForm $form;
+
     public
         $search = '',
         $perPage = '5',
         $sortBy = 'departments.updated_at',
         $sortDir = 'DESC',
         $confirmingDepartmentDeletion = false,
-        $confirmingDepartmentAddition = false;
+        $confirmingDepartmentAddition = false,
+        $editDepartmentModal = false;
 
-    public function updatedSearch()
+    public function updatedSearch(): void
     {
         $this->resetPage();
     }
 
-    public function setSortBy($sortByCol)
+    public function setSortBy($sortByCol): void
     {
         if ($this->sortBy = $sortByCol) {
             $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
@@ -37,7 +42,7 @@ class DepartmentsPage extends Component
         $this->sortBy = $sortByCol;
     }
 
-    public function render()
+    public function render(): View
     {
         $departments = Department::where(function ($query) {
             // Apply search conditions for id and name
@@ -53,7 +58,7 @@ class DepartmentsPage extends Component
         ]);
     }
 
-    public function confirmDepartmentDeletion($id)
+    public function confirmDepartmentDeletion($id): void
     {
         $this->confirmingDepartmentDeletion = $id;
     }
@@ -64,4 +69,20 @@ class DepartmentsPage extends Component
         $this->confirmingDepartmentDeletion = false;
     }
 
+    public function editDepartment(Department $id): void
+    {
+        $this->form->setDepartment($id);
+        $this->editDepartmentModal = true;
+    }
+
+    public function edit(): void
+    {
+        $this->validate();
+        // panggil method store dari DepartmentForm
+        $update = $this->form->update();
+        is_null($update)
+            ? $this->dispatch('notify', title: 'success', message: 'Department updated successfully!')
+            : $this->dispatch('notify', title: 'failed', message: 'Failed to update department!');
+        $this->dispatch('dispatch-edit-department-saved')->to(DepartmentsPage::class);
+    }
 }
