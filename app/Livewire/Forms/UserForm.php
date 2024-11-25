@@ -3,25 +3,44 @@
 namespace App\Livewire\Forms;
 
 use App\Models\User;
-use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Locked;
 use Livewire\Form;
 
 class UserForm extends Form
 {
     public ?User $user;
 
-    #[Validate('required|unique:users|min:6', as: 'Username')]
+    #[Locked]
+    public $id;
+//    #[Validate('required|unique:users,username,' . $id . '|min:6', as: 'Username')]
     public $username;
-    #[Validate('required|min:6', as: 'First Name')]
+//    #[Validate('required|min:6', as: 'First Name')]
     public $first_name;
-    #[Validate(as: 'Last Name')]
+//    #[Validate(as: 'Last Name')]
     public $last_name;
-    #[Validate('required|email|unique:users', as: 'Email')]
+//    #[Validate('required|email|unique:users,email,' . $id . '|min:6', as: 'Email')]
     public $email;
-    #[Validate('required', as: 'Department')]
+//    #[Validate('required', as: 'Department')]
     public $department_id;
-    #[Validate('required|min:8', as: 'Password')]
+//    #[Validate('required|min:8', as: 'Password')]
     public $password;
+
+    public function rules(): array
+    {
+        return [
+            'username' => ['required', 'min:6',
+                Rule::unique('users')->ignore($this->user)
+            ],
+            'email' => ['required', 'min:6', 'email',
+                Rule::unique('users')->ignore($this->user)
+            ],
+            'first_name' => ['required', 'min:3'],
+            'last_name' => ['nullable', 'min:3'],
+            'department_id' => ['nullable', 'numeric', 'exists:departments,id'],
+            'password' => ['required', 'min:8'],
+        ];
+    }
 
     public function setUser(User $user): void
     {

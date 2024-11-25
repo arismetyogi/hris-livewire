@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 
 #[Title('Departments')]
 // refresh page on save
-#[On('dispatch-department.create-save')]
+#[On('dispatch-create-department-saved')]
 #[On('dispatch-edit-department-saved')]
 class DepartmentsPage extends Component
 {

@@ -24,7 +24,7 @@ class Create extends Component
             : $this->dispatch('notify', title: 'failed', message: 'Data gagal disimpan!');
         $this->createDepartmentModal = false;
         // refresh Users Page after saving
-        $this->dispatch('dispatch-department.create-save')->to(DepartmentsPage::class);
+        $this->dispatch('dispatch-create-department-saved')->to(DepartmentsPage::class);
     }
 
     public function render(): View

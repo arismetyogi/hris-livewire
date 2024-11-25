@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\UserForm;
 use App\Models\User;
 use App\Traits\WithSorting;
+use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,13 +18,16 @@ class UsersPage extends Component
 {
     use WithPagination;
 
+    public UserForm $form;
+
     public
         $search = '',
         $perPage = '5',
         $sortBy = 'users.updated_at',
         $sortDir = 'DESC',
         $confirmingUserDeletion = false,
-        $confirmingUserAddition = false;
+        $confirmingUserAddition = false,
+        $editUserModal = false;
 
     public function updatedSearch(): void
     {
@@ -37,7 +42,7 @@ class UsersPage extends Component
         $this->sortBy = $sortByCol;
     }
 
-    public function render()
+    public function render(): View
     {
         $users = User::with('department')->where(function ($query) {
             // Apply search conditions for first_name, last_name, and email
@@ -54,14 +59,33 @@ class UsersPage extends Component
         ]);
     }
 
-    public function confirmUserDeletion($id)
+    public function confirmUserDeletion($id): void
     {
         $this->confirmingUserDeletion = $id;
     }
 
-    public function deleteUser(User $user)
+    public function deleteUser(User $user): void
     {
         $user->delete();
         $this->confirmingUserDeletion = false;
+    }
+
+    public function editUser(User $id): void
+    {
+        $this->form->setUser($id);
+        $this->editUserModal = true;
+    }
+
+    public function edit(): void
+    {
+        $this->validate();
+        // panggil method store dari UserForm
+        $update = $this->form->update();
+        is_null($update)
+            ? $this->dispatch('notify', title: 'success', message: 'User updated successfully!')
+            : $this->dispatch('notify', title: 'failed', message: 'Failed to update user!');
+        $this->dispatch('dispatch-edit-department-saved')->to(UsersPage::class);
+
+        $this->editUserModal = false;
     }
 }
