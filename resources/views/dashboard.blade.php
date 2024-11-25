@@ -13,6 +13,14 @@
             <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 <div class="text-indigo-500">Dashboard</div>
             </div>
+            <div class="grid grid-cols-3 gap-x-8 gap-y-4 px-8 py-8 justify-between items-center content-center bg-white shadow-xl sm:rounded-lg">
+                <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
+                <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
+                <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
+                <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
+                <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
+                <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
+            </div>
         </div>
     </div>
 </x-app-layout>
