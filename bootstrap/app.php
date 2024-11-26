@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->use([
-            'update.last_seen' => \App\Http\Middleware\UpdateLastSeenMiddleware::class,
+//            'update.last_seen' => \App\Http\Middleware\UpdateLastSeenMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

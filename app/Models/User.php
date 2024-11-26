@@ -64,20 +64,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
-
-    public function getStatusColorAttribute(): string
-    {
-        return $this->isOnline() ? 'green' : 'orange';
-    }
-
-    public function isOnline(): bool
-    {
-        if (!$this->last_seen) {
-            return false;
-        }
-        return $this->last_seen->diffInMinutes() < 1;
-    }
-
+    
     /**
      * Get the attributes that should be cast.
      *
@@ -87,6 +74,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'updated_at' => 'datetime',
             'password' => 'hashed',
         ];
     }

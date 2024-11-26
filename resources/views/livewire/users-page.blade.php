@@ -57,11 +57,17 @@
                 <x-slot name="head">
                     <x-table.heading></x-table.heading>
                     <x-table.heading>No</x-table.heading>
-                    <x-table.heading sortable="first_name">Name</x-table.heading>
-                    <x-table.heading sortable>Department</x-table.heading>
-                    <x-table.heading sortable>Role</x-table.heading>
-                    <x-table.heading sortable>Status</x-table.heading>
-                    <x-table.heading sortable>Last Update</x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('first_name')"
+                                     :direction="$sortField === 'first_name' ? $sortDirection : null">Name
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('department_name')"
+                                     :direction="$sortField === 'department_name' ? $sortDirection : null">Department
+                    </x-table.heading>
+                    <x-table.heading>Role</x-table.heading>
+                    <x-table.heading>Status</x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('users.updated_at')"
+                                     :direction="$sortField === 'users.updated_at' ? $sortDirection : null">Last Update
+                    </x-table.heading>
                     <x-table.heading>Action</x-table.heading>
                 </x-slot>
                 <x-slot name="body">
@@ -90,11 +96,24 @@
                             <x-table.cell>{{ $user->currentTeam ? $user->currentTeam->name : null }}</x-table.cell>
                             <x-table.cell>
                                 <div class="flex items-center">
-                                    <div class="h-2.5 w-2.5 rounded-full bg-{{ $user->status_color }}-500 me-2"></div>
-                                    {{ $user->is_online ? 'online' : 'offline' }}
+                                    @php
+                                        $session = $this->sessions->firstWhere('user_id', $user->id);
+                                        $lastActive = $session ? $session->last_active : 'offline';
+                                    @endphp
+                                    @if( $lastActive === 'offline')
+                                        <div class="flex items-center text-orange-600">
+                                            <span class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></span>
+                                            Offline
+                                        </div>
+                                    @else
+                                        <div class="flex items-center text-green-600">
+                                            <span class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></span>
+                                            Online
+                                        </div>
+                                    @endif
                                 </div>
                             </x-table.cell>
-                            <x-table.cell>{{ $user->updated_at->diffForHumans() }}</x-table.cell>
+                            <x-table.cell>{{ $user->updated_at ? $user->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
                                 <x-button wire:click="editUser({{ $user->id }})" type="button"
                                           class="tracking-widest bg-orange-500 hover:bg-orange-400">

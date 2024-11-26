@@ -8,18 +8,18 @@
             class="text-left text-sm leading-4 font-medium text-gray-500 uppercase tracking-wider">{{ $slot }}</span>
     @else
         <button
-            {{ $attributes->except('class') }} class="flex group items-center space-x-1 text-left text-sm leading-4 font-medium">
+            {{ $attributes->except('class') }} class="flex group items-center space-x-1 text-left text-sm uppercase leading-4 font-medium">
             <span>{{ $slot }}</span>
 
             <span>
                 @if($direction === 'asc')
-                    <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                    <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="m5 15 7-7 7 7"/>
                     </svg>
                 @elseif($direction === 'desc')
-                    <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                    <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="m19 9-7 7-7-7"/>
