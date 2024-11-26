@@ -35,6 +35,10 @@
                                 wire:navigate>
                         {{ __('Departments') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('provinces') }}" :active="request()->routeIs('provinces')"
+                                wire:navigate>
+                        {{ __('Provinces') }}
+                    </x-nav-link>
                     <x-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')" wire:navigate>
                         {{ __('Users') }}
                     </x-nav-link>
