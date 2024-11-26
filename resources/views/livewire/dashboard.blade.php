@@ -17,9 +17,6 @@
                         <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
                         <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
                         <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
-                        <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
-                        <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
-                        <div class="text-primary-700 px-8 py-4 bg-gray-50 shadow-lg h-64">Card</div>
                     </div>
                     <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
                         <div class="text-secondary-500 font-semibold text-xl my-4 py-4 px-8">Departments</div>
