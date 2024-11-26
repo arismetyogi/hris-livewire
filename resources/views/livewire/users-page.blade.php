@@ -87,11 +87,11 @@
                                 </div>
                             </x-table.cell>
                             <x-table.cell>{{ $user->department ? $user->department->name : null }}</x-table.cell>
-                            <x-table.cell>{{ $user->created_at->dayName }}</x-table.cell>
+                            <x-table.cell>{{ $user->currentTeam ? $user->currentTeam->name : null }}</x-table.cell>
                             <x-table.cell>
                                 <div class="flex items-center">
-                                    <div class="h-2.5 w-2.5 rounded-full bg-{{ $user->isOnline }}-500 me-2"></div>
-                                    {{ 'online' }}
+                                    <div class="h-2.5 w-2.5 rounded-full bg-{{ $user->status_color }}-500 me-2"></div>
+                                    {{ $user->is_online ? 'online' : 'offline' }}
                                 </div>
                             </x-table.cell>
                             <x-table.cell>{{ $user->updated_at->diffForHumans() }}</x-table.cell>

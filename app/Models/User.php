@@ -67,10 +67,15 @@ class User extends Authenticatable
 
     public function getStatusColorAttribute(): string
     {
-        return [
-            'online' => 'green',
-            'offline' => 'orange',
-        ][$this->status] ?? 'gray';
+        return $this->isOnline() ? 'green' : 'orange';
+    }
+
+    public function isOnline(): bool
+    {
+        if (!$this->last_seen) {
+            return false;
+        }
+        return $this->last_seen->diffInMinutes() < 1;
     }
 
     /**
