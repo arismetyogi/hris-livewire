@@ -11,7 +11,7 @@
                 <div class="col-span-6 sm:col-span-4">
                     <x-label for="form.code" value="{{ __('Province Code') }}"/>
                     <x-input id="form.code" type="text" class="block w-full mt-1" wire:model="form.code"
-                             required autocomplete="department.code"/>
+                             required autocomplete="province.code"/>
                     <x-input-error for="form.code" class="mt-2"/>
                 </div>
 
@@ -19,13 +19,13 @@
                 <div class="col-span-6 sm:col-span-4">
                     <x-label for="form.name" value="{{ __('Province Name') }}"/>
                     <x-input id="form.name" type="text" class="block w-full mt-1" wire:model="form.name"
-                             autocomplete="department.name"/>
+                             autocomplete="province.name"/>
                     <x-input-error for="form.name" class="mt-2"/>
                 </div>
                 <div class="col-span-6 sm:col-span-4">
                     <x-label for="form.name_en" value="{{ __('Province Name (EN)') }}"/>
                     <x-input id="form.name_en" type="text" class="block w-full mt-1" wire:model="form.name_en"
-                             autocomplete="department.name_en"/>
+                             autocomplete="province.name_en"/>
                     <x-input-error for="form.name_en" class="mt-2"/>
                 </div>
 
