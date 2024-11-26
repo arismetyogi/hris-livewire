@@ -65,7 +65,9 @@
                                      :direction="$sortField === 'department_name' ? $sortDirection : null">Department
                     </x-table.heading>
                     <x-table.heading sortable>Role</x-table.heading>
-                    <x-table.heading sortable>Status</x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('last_activity')"
+                                     :direction="$sortField === 'last_activity' ? $sortDirection : null">Status
+                    </x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('users.updated_at')"
                                      :direction="$sortField === 'users.updated_at' ? $sortDirection : null">Last Update
                     </x-table.heading>
@@ -91,12 +93,15 @@
                                     <div class="font-normal text-gray-500">
                                         {{ $user->email }}
                                     </div>
+                                    <div class="font-light text-sm text-gray-500">
+                                        {{ $user->username }}
+                                    </div>
                                 </div>
                             </x-table.cell>
                             <x-table.cell>{{ $user->department ? $user->department->name : null }}</x-table.cell>
                             <x-table.cell>{{ $user->currentTeam ? $user->currentTeam->name : null }}</x-table.cell>
                             <x-table.cell>
-                                <div class="flex items-center">
+                                <div class="flex-col items-center">
                                     @php
                                         $session = $this->sessions->firstWhere('user_id', $user->id);
                                         $lastActive = $session ? $session->last_active : 'offline';
@@ -112,9 +117,13 @@
                                             Online
                                         </div>
                                     @endif
+                                    <div
+                                        class="text-xs font-light">{{ $user->last_activity ? \Carbon\Carbon::parse($user->last_activity)->diffForHumans() : null }}</div>
                                 </div>
                             </x-table.cell>
-                            <x-table.cell>{{ $user->updated_at ? $user->updated_at->diffForHumans() : null }}</x-table.cell>
+                            <x-table.cell>
+                                {{ $user->updated_at ? $user->updated_at->diffForHumans() : null }}
+                            </x-table.cell>
                             <x-table.cell>
                                 <x-button wire:click="editUser({{ $user->id }})" type="button"
                                           class="tracking-widest bg-orange-500 hover:bg-orange-400">

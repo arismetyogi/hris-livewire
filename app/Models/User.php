@@ -5,8 +5,11 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
@@ -64,7 +67,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
-    
+
+    public function sessions(): hasMany
+    {
+        return $this->hasMany(Session::class);
+    }
+
+    public function getLastActivityAttribute()
+    {
+        return DB::table('sessions')
+            ->where('user_id', $this->id)
+            ->orderBy('last_activity', 'desc')
+            ->value('last_activity');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

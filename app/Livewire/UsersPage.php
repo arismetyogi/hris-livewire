@@ -51,6 +51,7 @@ class UsersPage extends Component
     public function render(): View
     {
         $users = User::with('department')
+            ->select('users.*', 'departments.name as department_name')
             ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
             ->where(function ($query) {
                 // Apply search conditions for first_name, last_name, and email
@@ -60,7 +61,6 @@ class UsersPage extends Component
                     ->orWhere('email', 'like', '%' . $this->search . '%');
             })
             ->orderBy($this->sortField, $this->sortDirection)
-            ->select('users.*', 'departments.name as department_name')
             ->paginate($this->perPage);
 
         return view('livewire.users-page', [

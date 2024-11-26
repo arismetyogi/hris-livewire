@@ -58,6 +58,7 @@
                 <x-slot name="head">
                     <x-table.heading></x-table.heading>
                     <x-table.heading sortable>No</x-table.heading>
+                    <x-table.heading sortable>Action</x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('code')"
                                      :direction="$sortField === 'code' ? $sortDirection : null">Province Code
                     </x-table.heading>
@@ -70,7 +71,6 @@
                     <x-table.heading sortable wire:click="sortBy('updated_at')"
                                      :direction="$sortField === 'updated_at' ? $sortDirection : null">Last Update
                     </x-table.heading>
-                    <x-table.heading sortable>Action</x-table.heading>
                 </x-slot>
                 <x-slot name="body">
                     @forelse($provinces as $province)
@@ -83,6 +83,15 @@
                                 </div>
                             </x-table.cell>
                             <x-table.cell>{{ $provinces->firstItem() + $loop->index }}</x-table.cell>
+                            <x-table.cell>
+                                <x-button wire:click="editProvince({{ $province->id }})" type="button"
+                                          class="tracking-widest bg-orange-500 hover:bg-orange-400">
+                                    <x-heroicon-o-pencil class="h-4 w-4 text-white"/>
+                                </x-button>
+                                <x-danger-button wire:click='confirmProvinceDeletion({{ $province->id }})'>
+                                    <x-heroicon-o-trash class="h-4 w-4 text-white"/>
+                                </x-danger-button>
+                            </x-table.cell>
                             <x-table.cell class="flex">
                                 <div class="ps-3">
                                     <div class="text-base font-semibold">{{ $province->code}}</div>
@@ -92,17 +101,6 @@
                             <x-table.cell>{{ $province->name ? $province->name : null }}</x-table.cell>
                             <x-table.cell>{{ $province->name_en }}</x-table.cell>
                             <x-table.cell>{{ $province->updated_at ? $province->updated_at->diffForHumans() : null }}</x-table.cell>
-                            <x-table.cell>
-                                <x-button wire:click="editProvince({{ $province->id }})" type="button"
-                                          class="tracking-widest bg-orange-500 hover:bg-orange-400">
-                                    <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
-                                    edit
-                                </x-button>
-                                <x-danger-button wire:click='confirmProvinceDeletion({{ $province->id }})'>
-                                    <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
-                                    delete
-                                </x-danger-button>
-                            </x-table.cell>
                         </x-table.row>
                     @empty
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
