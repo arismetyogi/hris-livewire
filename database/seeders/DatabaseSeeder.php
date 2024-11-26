@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +15,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->withPersonalTeam()->create();
 
-        User::factory()->withPersonalTeam()->create([
-            'username' => 'suadmin',
-            'first_name' => 'Super',
-            'last_name' => 'Admin',
-            'email' => 'suadmin@gmail.com',
+//        User::factory()->withPersonalTeam()->create([
+//            'username' => 'suadmin',
+//            'first_name' => 'Super',
+//            'last_name' => 'Admin',
+//            'email' => 'suadmin@gmail.com',
+//        ]);
+
+        $this->call([
+//            ProvinceSeeder::class,
+//            ZipSeeder::class,
+            StoreSeeder::class,
         ]);
     }
 }
