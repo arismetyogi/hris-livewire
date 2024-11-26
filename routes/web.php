@@ -19,4 +19,10 @@ Route::middleware([
     Route::get('/users/{user}', UsersPage::class);
 
     Route::get('/departments', \App\Livewire\DepartmentsPage::class)->name('departments');
+
+    Route::get('/provinces', \App\Livewire\ProvincesPage::class)->name('provinces');
+
+    Route::get('/zips', \App\Livewire\ZipsPage::class)->name('zips');
+
+    Route::get('/stores', \App\Livewire\StoresPage::class)->name('stores');
 });
