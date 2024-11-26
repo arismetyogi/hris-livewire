@@ -23,8 +23,8 @@ class ZipsPage extends Component
     public
         $search = '',
         $perPage = '5',
-        $sortField = 'updated_at',
-        $sortDirection = 'desc',
+        $sortField = 'provinces.name',
+        $sortDirection = 'asc',
         $confirmingZipDeletion = false,
         $confirmingZipAddition = false,
         $editZipModal = false;
@@ -47,17 +47,24 @@ class ZipsPage extends Component
 
     public function render(): View
     {
-        $zips = Zip::where(function ($query) {
+        $zips = Zip::with('province')
+            ->select('zips.*', 'provinces.name as province_name', 'provinces.name_en as province_name_en', 'provinces.code as province_code')
+            ->leftJoin('provinces', 'zips.province_code', '=', 'provinces.code')
+            ->where(function ($query) {
             // Apply search conditions for id and name
             $query
-                ->orWhere('id', 'like', '%' . $this->search . '%')
-                ->orWhere('name', 'like', '%' . $this->search . '%');
+                ->orWhere('provinces.name', 'like', '%' . $this->search . '%')
+                ->orWhere('provinces.name_en', 'like', '%' . $this->search . '%')
+                ->orWhere('urban', 'like', '%' . $this->search . '%')
+                ->orWhere('subdistrict', 'like', '%' . $this->search . '%')
+                ->orWhere('city', 'like', '%' . $this->search . '%')
+                ->orWhere('zipcode', 'like', '%' . $this->search . '%');
         })
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
         return view('livewire.zips-page', [
-            'provinces' => $zips
+            'zips' => $zips
         ]);
     }
 
@@ -84,8 +91,8 @@ class ZipsPage extends Component
         // panggil method store dari ZipForm
         $update = $this->form->update();
         is_null($update)
-            ? $this->dispatch('notify', title: 'success', message: 'Zip updated successfully!')
-            : $this->dispatch('notify', title: 'failed', message: 'Failed to update province!');
+            ? $this->dispatch('notify', title: 'success', message: 'Zipcode updated successfully!')
+            : $this->dispatch('notify', title: 'failed', message: 'Failed to update zipcode!');
         $this->dispatch('dispatch-edit-province-saved')->to(ZipsPage::class);
     }
 }

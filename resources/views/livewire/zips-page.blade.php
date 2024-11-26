@@ -71,7 +71,7 @@
                                      :direction="$sortField === 'city' ? $sortDirection : null">City
                     </x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('zipcode')"
-                                     :direction="$sortField === 'zipcode' ? $sortDirection : null">City
+                                     :direction="$sortField === 'zipcode' ? $sortDirection : null">Zip Code
                     </x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('updated_at')"
                                      :direction="$sortField === 'updated_at' ? $sortDirection : null">Last Update
@@ -98,6 +98,7 @@
                             <x-table.cell>{{ $zip->urban }}</x-table.cell>
                             <x-table.cell>{{ $zip->subdistrict }}</x-table.cell>
                             <x-table.cell>{{ $zip->city }}</x-table.cell>
+                            <x-table.cell>{{ $zip->zipcode }}</x-table.cell>
                             <x-table.cell>{{ $zip->updated_at ? $zip->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
                                 <x-button wire:click="editProvince({{ $zip->id }})" type="button"
@@ -131,9 +132,9 @@
             </div>
         </div>
         <!-- Delete Province Modal -->
-        <x-dialog-modal wire:model.live="confirmingProvinceDeletion">
+        <x-dialog-modal wire:model.live="confirmingZipDeletion">
             <x-slot name="title">
-                {{ __('Delete Province') }}
+                {{ __('Delete Zip') }}
             </x-slot>
 
             <x-slot name="content">
@@ -141,54 +142,72 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-secondary-button wire:click="set('confirmingProvinceDeletion', false)"
+                <x-secondary-button wire:click="set('confirmingZipDeletion', false)"
                                     wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ms-3" wire:click="deleteProvince({{ $confirmingProvinceDeletion }})"
+                <x-danger-button class="ms-3" wire:click="deleteZip({{ $confirmingZipDeletion }})"
                                  wire:loading.attr="disabled">
-                    {{ __('Delete Province') }}
+                    {{ __('Delete Zip') }}
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>
 
-        <!-- Edit Province Modal -->
-        <x-dialog-modal id="editProvinceModal" wire:model.live="editProvinceModal" submit="edit">
+        <!-- Edit Zip Modal -->
+        <x-dialog-modal id="editZipModal" wire:model.live="editZipModal" submit="edit">
             <x-slot name="title">
-                {{ __('Edit Province Details') }}
+                {{ __('Edit Zip Details') }}
             </x-slot>
 
             <x-slot name="content">
                 <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
                     <!-- ID -->
                     <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.code" value="{{ __('Province Code') }}"/>
+                        <x-label for="form.code" value="{{ __('Province') }}"/>
                         <x-input id="form.code" type="text" class="block w-full mt-1" wire:model="form.code"
-                                 required autocomplete="zip.code"/>
+                                 required autocomplete="department.code"/>
                         <x-input-error for="form.code" class="mt-2"/>
                     </div>
 
-                    <!-- Name -->
+                    <!-- Urban -->
                     <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.name" value="{{ __('Province Name') }}"/>
-                        <x-input id="form.name" type="text" class="block w-full mt-1" wire:model="form.name"
-                                 autocomplete="zip.name"/>
-                        <x-input-error for="form.name" class="mt-2"/>
+                        <x-label for="form.urban" value="{{ __('Urban') }}"/>
+                        <x-input id="form.urban" type="text" class="block w-full mt-1" wire:model="form.urban"
+                                 autocomplete="zip.urban"/>
+                        <x-input-error for="form.urban" class="mt-2"/>
                     </div>
 
+                    <!-- Subdistrict -->
                     <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.name_en" value="{{ __('Province Name (EN)') }}"/>
-                        <x-input id="form.name_en" type="text" class="block w-full mt-1" wire:model="form.name_en"
-                                 autocomplete="zip.name_en"/>
-                        <x-input-error for="form.name_en" class="mt-2"/>
+                        <x-label for="form.subdistrict" value="{{ __('Subdistrict') }}"/>
+                        <x-input id="form.subdistrict" type="text" class="block w-full mt-1" wire:model="form.subdistrict"
+                                 autocomplete="zip.subdistrict"/>
+                        <x-input-error for="form.subdistrict" class="mt-2"/>
+                    </div>
+
+                    <!-- City -->
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-label for="form.city" value="{{ __('City') }}"/>
+                        <x-input id="form.city" type="text" class="block w-full mt-1" wire:model="form.city"
+                                 autocomplete="zip.city"/>
+                        <x-input-error for="form.city" class="mt-2"/>
+                    </div>
+
+                    <!-- Zipcode -->
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-label for="form.zipcode" value="{{ __('Zip Code') }}"/>
+                        <x-input id="form.zipcode" type="text" class="block w-full mt-1" wire:model="form.zipcode"
+                                 autocomplete="zip.zipcode"/>
+                        <x-input-error for="form.zipcode" class="mt-2"/>
                     </div>
 
                 </div>
+
             </x-slot>
 
             <x-slot name="footer">
-                <x-secondary-button wire:click="set('editProvinceModal', false)" wire:loading.attr="disabled">
+                <x-secondary-button wire:click="set('editZipModal', false)" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
                 <x-button class="ms-3" wire:loading.attr="disabled">
