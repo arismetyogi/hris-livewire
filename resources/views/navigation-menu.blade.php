@@ -39,6 +39,10 @@
                                 wire:navigate>
                         {{ __('Provinces') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('zips') }}" :active="request()->routeIs('zips')"
+                                wire:navigate>
+                        {{ __('Zip Codes') }}
+                    </x-nav-link>
                     <x-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')" wire:navigate>
                         {{ __('Users') }}
                     </x-nav-link>

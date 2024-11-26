@@ -101,11 +101,11 @@
                             <x-table.cell>{{ $zip->zipcode }}</x-table.cell>
                             <x-table.cell>{{ $zip->updated_at ? $zip->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
-                                <x-button wire:click="editProvince({{ $zip->id }})" type="button"
+                                <x-button wire:click="editZip({{ $zip->id }})" type="button"
                                           class="tracking-widest bg-orange-500 hover:bg-orange-400">
                                     <x-heroicon-o-pencil class="h-4 w-4 text-white"/>
                                 </x-button>
-                                <x-danger-button wire:click='confirmProvinceDeletion({{ $zip->id }})'>
+                                <x-danger-button wire:click='confirmZipgDeletion({{ $zip->id }})'>
                                     <x-heroicon-o-trash class="h-4 w-4 text-white"/>
                                 </x-danger-button>
                             </x-table.cell>
@@ -164,10 +164,16 @@
                 <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
                     <!-- ID -->
                     <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.code" value="{{ __('Province') }}"/>
-                        <x-input id="form.code" type="text" class="block w-full mt-1" wire:model="form.code"
-                                 required autocomplete="department.code"/>
-                        <x-input-error for="form.code" class="mt-2"/>
+                        <x-label for="form.province_code" value="{{ __('Province') }}"/>
+                        <select class="block w-full mt-1"
+                                wire:model="form.province_code"
+                                required>
+                            <option disabled value="">Select Province</option>
+                            @foreach(\App\Models\Province::all() as $province)
+                                <option value="{{ $province->code}}">{{ $province->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="form.province_code" class="mt-2"/>
                     </div>
 
                     <!-- Urban -->

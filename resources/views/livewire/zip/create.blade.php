@@ -9,10 +9,16 @@
             <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
                 <!-- ID -->
                 <div class="col-span-6 sm:col-span-4">
-                    <x-label for="form.code" value="{{ __('Province') }}"/>
-                    <x-input id="form.code" type="text" class="block w-full mt-1" wire:model="form.code"
-                             required autocomplete="department.code"/>
-                    <x-input-error for="form.code" class="mt-2"/>
+                    <x-label for="form.province_code" value="{{ __('Province') }}"/>
+                    <select class="block w-full mt-1"
+                            wire:model="form.province_code"
+                            required>
+                        <option disabled value="">Select Province</option>
+                        @foreach(\App\Models\Province::all() as $province)
+                            <option value="{{ $province->code}}">{{ $province->name }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="form.province_code" class="mt-2"/>
                 </div>
 
                 <!-- Urban -->
