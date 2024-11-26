@@ -30,10 +30,16 @@
                                 <x-table.heading sortable>Department Name</x-table.heading>
                             </x-slot>
                             <x-slot name="body">
-                                @forelse(\App\Models\Department::latest()->get() as $department)
+                                @forelse(\App\Models\Department::latest()->take(5)->get() as $department)
                                     <x-table.row>
                                         <x-table.cell>{{ $loop->iteration }}</x-table.cell>
-                                        <x-table.cell>{{ $department->id }}</x-table.cell>
+                                        <x-table.cell>
+                                            <div class="ps-3">
+                                                <div class="text-base font-semibold">{{ $department->id}}</div>
+                                                <div
+                                                    class="font-normal text-xs text-gray-400">{{ $department->name }}</div>
+                                            </div>
+                                        </x-table.cell>
                                         <x-table.cell>{{ $department->name }}</x-table.cell>
                                     </x-table.row>
                                 @empty

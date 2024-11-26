@@ -51,81 +51,63 @@
             </div>
             <livewire:department.create/>
         </div>
-        <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                    </div>
-                </th>
-                @include('livewire.includes.th-no-sort', [
-                'name' => 'departments id'
-                ])
-                @include('livewire.includes.th-with-sort', [
-                'name' => 'departments.name',
-                'displayName' => 'department name'
-                ])
-                @include('livewire.includes.th-with-sort', [
-                'name' => 'departments.updated_at',
-                'displayName' => 'last updated'
-                ])
-                <th scope="col" class="px-6 py-3">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @forelse ($departments as $department)
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-table-search-{{ $department->id }}" type="checkbox"
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                            <label for="checkbox-table-search-{{ $department->id }}" class="sr-only">checkbox</label>
-                        </div>
-                    </td>
-                    <!-- Dept ID -->
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            {{ $department->id }}
-                        </div>
-                    </td>
-                    <!-- Dept Name -->
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            {{ $department->name }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            {{ $department->updated_at->diffForHumans() }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <!-- Modal toggle -->
-                        <x-button
-                            wire:click="editDepartment({{ $department->id }})"
-                            type="button"
-                            class="tracking-widest bg-orange-500 hover:bg-orange-400">
-                            <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
-                        </x-button>
-                        <x-danger-button wire:click='confirmDepartmentDeletion({{ $department->id }})'>
-                            <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
-                            delete
-                        </x-danger-button>
-                    </td>
-                </tr>
-            @empty
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 col-span-full
-                dark:hover:bg-gray-600">
-                    <td class="px-6 py-4">No Department Found!</td>
-                </tr>
-            @endforelse
 
-            </tbody>
-        </table>
+        <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="text-secondary-500 font-semibold text-xl my-4 py-4 px-8">Departments</div>
+            <x-table>
+                <x-slot name="head">
+                    <x-table.heading></x-table.heading>
+                    <x-table.heading sortable>No</x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('id')"
+                                     :direction="$sortField === 'id' ? $sortDirection : null">Department ID
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('name')"
+                                     :direction="$sortField === 'name' ? $sortDirection : null">Department Name
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('updated_at')"
+                                     :direction="$sortField === 'updated_at' ? $sortDirection : null">Last Update
+                    </x-table.heading>
+                    <x-table.heading sortable>Action</x-table.heading>
+                </x-slot>
+                <x-slot name="body">
+                    @forelse($departments as $department)
+                        <x-table.row>
+                            <x-table.cell>
+                                <div class="flex items-center">
+                                    <input id="checkbox-all-search" type="checkbox"
+                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                                    <label for="checkbox-all-search" class="sr-only">check</label>
+                                </div>
+                            </x-table.cell>
+                            <x-table.cell>{{ $departments->firstItem() + $loop->index }}</x-table.cell>
+                            <x-table.cell class="flex">
+                                <div class="ps-3">
+                                    <div class="text-base font-semibold">{{ $department->id}}</div>
+                                    <div class="font-normal text-xs text-gray-400">{{ $department->name }}</div>
+                                </div>
+                            </x-table.cell>
+                            <x-table.cell>{{ $department->name ? $department->name : null }}</x-table.cell>
+                            <x-table.cell>{{ $department->updated_at ? $department->updated_at->diffForHumans() : null }}</x-table.cell>
+                            <x-table.cell>
+                                <x-button wire:click="editDepartment({{ $department->id }})" type="button"
+                                          class="tracking-widest bg-orange-500 hover:bg-orange-400">
+                                    <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
+                                    edit
+                                </x-button>
+                                <x-danger-button wire:click='confirmDepartmentDeletion({{ $department->id }})'>
+                                    <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
+                                    delete
+                                </x-danger-button>
+                            </x-table.cell>
+                        </x-table.row>
+                    @empty
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4">No Department Found!</td>
+                        </tr>
+                    @endforelse
+                </x-slot>
+            </x-table>
+        </div>
 
         <div class="flex flex-wrap items-center justify-between py-12 space-y-4 flex-column md:flex-row md:space-y-0">
             <div wire:model.live="perPage">

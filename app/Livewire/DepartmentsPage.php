@@ -23,8 +23,8 @@ class DepartmentsPage extends Component
     public
         $search = '',
         $perPage = '5',
-        $sortBy = 'departments.updated_at',
-        $sortDir = 'DESC',
+        $sortField = 'updated_at',
+        $sortDirection = 'desc',
         $confirmingDepartmentDeletion = false,
         $confirmingDepartmentAddition = false,
         $editDepartmentModal = false;
@@ -34,12 +34,15 @@ class DepartmentsPage extends Component
         $this->resetPage();
     }
 
-    public function setSortBy($sortByCol): void
+    public function sortBy($field): void
     {
-        if ($this->sortBy = $sortByCol) {
-            $this->sortDir = ($this->sortDir == 'ASC') ? 'DESC' : 'ASC';
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
         }
-        $this->sortBy = $sortByCol;
+
+        $this->sortField = $field;
     }
 
     public function render(): View
@@ -50,7 +53,7 @@ class DepartmentsPage extends Component
                 ->orWhere('id', 'like', '%' . $this->search . '%')
                 ->orWhere('name', 'like', '%' . $this->search . '%');
         })
-            ->orderBy($this->sortBy, $this->sortDir)
+            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
         return view('livewire.departments-page', [

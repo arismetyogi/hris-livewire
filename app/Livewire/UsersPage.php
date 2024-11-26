@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Livewire\Forms\UserForm;
 use App\Models\User;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
@@ -31,6 +30,8 @@ class UsersPage extends Component
         $confirmingUserAddition = false,
         $editUserModal = false;
 
+    protected $queryString = ['search', 'sortField', 'sortDirection'];
+
     public function updatedSearch(): void
     {
         $this->resetPage();
@@ -38,7 +39,12 @@ class UsersPage extends Component
 
     public function sortBy($field): void
     {
-        $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
         $this->sortField = $field;
     }
 
@@ -89,7 +95,6 @@ class UsersPage extends Component
 
         return collect(
             DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-                ->where('user_id', Auth::user()->getAuthIdentifier())
                 ->orderBy('last_activity', 'desc')
                 ->get()
         )->map(function ($session) {
@@ -100,11 +105,6 @@ class UsersPage extends Component
                 'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
             ];
         });
-    }
-
-    public function getStatusColorAttribute($userId): string
-    {
-        return $this->isOnline($userId) ? 'green' : 'orange';
     }
 
     public function isOnline($userId): bool

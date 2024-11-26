@@ -51,24 +51,25 @@
             </div>
             <livewire:user.create/>
         </div>
+
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
-            <div class="text-secondary-500 font-semibold text-xl my-4 py-4 px-8">Departments</div>
+            <div class="text-secondary-500 font-semibold text-xl my-4 py-4 px-8">Users</div>
             <x-table>
                 <x-slot name="head">
                     <x-table.heading></x-table.heading>
-                    <x-table.heading>No</x-table.heading>
+                    <x-table.heading sortable>No</x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('first_name')"
                                      :direction="$sortField === 'first_name' ? $sortDirection : null">Name
                     </x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('department_name')"
                                      :direction="$sortField === 'department_name' ? $sortDirection : null">Department
                     </x-table.heading>
-                    <x-table.heading>Role</x-table.heading>
-                    <x-table.heading>Status</x-table.heading>
+                    <x-table.heading sortable>Role</x-table.heading>
+                    <x-table.heading sortable>Status</x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('users.updated_at')"
                                      :direction="$sortField === 'users.updated_at' ? $sortDirection : null">Last Update
                     </x-table.heading>
-                    <x-table.heading>Action</x-table.heading>
+                    <x-table.heading sortable>Action</x-table.heading>
                 </x-slot>
                 <x-slot name="body">
                     @forelse($users as $user)
@@ -128,7 +129,7 @@
                         </x-table.row>
                     @empty
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4">No Department Found!</td>
+                            <td class="px-6 py-4">No User Found!</td>
                         </tr>
                     @endforelse
                 </x-slot>
