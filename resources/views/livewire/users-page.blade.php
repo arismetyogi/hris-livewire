@@ -51,103 +51,70 @@
             </div>
             <livewire:user.create/>
         </div>
-        <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                    </div>
-                </th>
-                @include('livewire.includes.th-with-sort', [
-                'name' => 'users.first_name',
-                'displayName' => 'name'
-                ])
-                @include('livewire.includes.th-with-sort', [
-                'name' => 'users.department_id',
-                'displayName' => 'department'
-                ])
-                @include('livewire.includes.th-no-sort', [
-                'name' => 'role'
-                ])
-                @include('livewire.includes.th-no-sort', [
-                'name' => 'status'
-                ])
-                @include('livewire.includes.th-with-sort', [
-                'name' => 'users.updated_at',
-                'displayName' => 'last update'
-                ])
-                <th scope="col" class="px-6 py-3">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @forelse ($users as $user)
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-table-search-{{ $user->id }}" type="checkbox"
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                            <label for="checkbox-table-search-{{ $user->id }}" class="sr-only">checkbox</label>
-                        </div>
-                    </td>
-                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <img class="w-10 h-10 rounded-full" src="{{ $user->profile_photo_url }}"
-                             alt="{{ $user->username }}"/>
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">{{ $user->first_name . ' ' . $user->last_name }}</div>
-                            <div class="font-normal text-gray-500">
-                                {{ $user->email }}
-                            </div>
-                        </div>
-                    </th>
-                    <!-- Department -->
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            {{ $user->department ? $user->department->name : null }}
-                        </div>
-                    </td>
-                    <!-- Role -->
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            {{ $user->email_verified_at }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                            {{ 'online status' }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            {{ $user->updated_at->diffForHumans() }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <!-- Modal toggle -->
-                        <x-button wire:click="editUser({{ $user->id }})" type="button"
-                                  class="tracking-widest bg-orange-500 hover:bg-orange-400">
-                            <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
-                            edit
-                        </x-button>
-                        <x-danger-button wire:click='confirmUserDeletion({{ $user->id }})'>
-                            <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
-                            delete
-                        </x-danger-button>
-                    </td>
-                </tr>
-            @empty
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50
-                dark:hover:bg-gray-600">
-                    <td class="px-6 py-4">No Users Found!</td>
-                </tr>
-            @endforelse
-
-            </tbody>
-        </table>
+        <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="text-secondary-500 font-semibold text-xl my-4 py-4 px-8">Departments</div>
+            <x-table>
+                <x-slot name="head">
+                    <x-table.heading></x-table.heading>
+                    <x-table.heading>No</x-table.heading>
+                    <x-table.heading sortable="first_name">Name</x-table.heading>
+                    <x-table.heading sortable>Department</x-table.heading>
+                    <x-table.heading sortable>Role</x-table.heading>
+                    <x-table.heading sortable>Status</x-table.heading>
+                    <x-table.heading sortable>Last Update</x-table.heading>
+                    <x-table.heading>Action</x-table.heading>
+                </x-slot>
+                <x-slot name="body">
+                    @forelse($users as $user)
+                        <x-table.row>
+                            <x-table.cell>
+                                <div class="flex items-center">
+                                    <input id="checkbox-all-search" type="checkbox"
+                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                                    <label for="checkbox-all-search" class="sr-only">check</label>
+                                </div>
+                            </x-table.cell>
+                            <x-table.cell>{{ $users->firstItem() + $loop->index }}</x-table.cell>
+                            <x-table.cell class="flex">
+                                <img class="w-10 h-10 rounded-full" src="{{ $user->profile_photo_url }}"
+                                     alt="{{ $user->username }}"/>
+                                <div class="ps-3">
+                                    <div
+                                        class="text-base font-semibold">{{ $user->first_name . ' ' . $user->last_name }}</div>
+                                    <div class="font-normal text-gray-500">
+                                        {{ $user->email }}
+                                    </div>
+                                </div>
+                            </x-table.cell>
+                            <x-table.cell>{{ $user->department ? $user->department->name : null }}</x-table.cell>
+                            <x-table.cell>{{ $user->created_at->dayName }}</x-table.cell>
+                            <x-table.cell>
+                                <div class="flex items-center">
+                                    <div class="h-2.5 w-2.5 rounded-full bg-{{ $user->isOnline }}-500 me-2"></div>
+                                    {{ 'online' }}
+                                </div>
+                            </x-table.cell>
+                            <x-table.cell>{{ $user->updated_at->diffForHumans() }}</x-table.cell>
+                            <x-table.cell>
+                                <x-button wire:click="editUser({{ $user->id }})" type="button"
+                                          class="tracking-widest bg-orange-500 hover:bg-orange-400">
+                                    <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
+                                    edit
+                                </x-button>
+                                <x-danger-button wire:click='confirmUserDeletion({{ $user->id }})'>
+                                    <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
+                                    delete
+                                </x-danger-button>
+                            </x-table.cell>
+                        </x-table.row>
+                    @empty
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4">No Department Found!</td>
+                        </tr>
+                    @endforelse
+                </x-slot>
+            </x-table>
+        </div>
 
         <div class="flex flex-wrap items-center justify-between py-12 space-y-4 flex-column md:flex-row md:space-y-0">
             <div wire:model.live="perPage">
@@ -244,7 +211,8 @@
                     <!-- Password Confirmation -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="form.password_confirmation" value="{{ __('Password Confirmation') }}"/>
-                        <x-input id="form.password_confirmation" type="password" class="block w-full mt-1" wire:model="form.password_confirmation" required/>
+                        <x-input id="form.password_confirmation" type="password" class="block w-full mt-1"
+                                 wire:model="form.password_confirmation" required/>
                         <x-input-error for="form.password_confirmation" class="mt-2"/>
                     </div>
                 </div>

@@ -65,6 +65,14 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
+    public function getStatusColorAttribute(): string
+    {
+        return [
+            'online' => 'green',
+            'offline' => 'orange',
+        ][$this->status] ?? 'gray';
+    }
+
     /**
      * Get the attributes that should be cast.
      *
