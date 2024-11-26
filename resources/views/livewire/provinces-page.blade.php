@@ -173,7 +173,7 @@
                     </div>
 
                     <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.name_en" value="{{ __('Province Name') }}"/>
+                        <x-label for="form.name_en" value="{{ __('Province Name (EN)') }}"/>
                         <x-input id="form.name_en" type="text" class="block w-full mt-1" wire:model="form.name_en"
                                  autocomplete="province.name_en"/>
                         <x-input-error for="form.name_en" class="mt-2"/>
