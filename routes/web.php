@@ -25,4 +25,8 @@ Route::middleware([
     Route::get('/zips', \App\Livewire\ZipsPage::class)->name('zips');
 
     Route::get('/stores', \App\Livewire\StoresPage::class)->name('stores');
+
+    Route::get('/employees', \App\Livewire\EmployeesPage::class)->name('employees');
+
+    Route::get('/payrolls', \App\Livewire\PayrollsPage::class)->name('payrolls');
 });

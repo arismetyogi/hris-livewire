@@ -14,7 +14,8 @@ use Livewire\WithPagination;
 
 #[Title('Users')]
 // refresh page on save
-#[On('dispatch-user.create-save')]
+#[On('dispatch-create-user-saved')]
+#[On('dispatch-edit-user-saved')]
 class UsersPage extends Component
 {
     use WithPagination;
@@ -107,22 +108,6 @@ class UsersPage extends Component
         });
     }
 
-    public function isOnline($userId): bool
-    {
-        $session = $this->sessions->firstWhere('user_id', $userId);
-
-        // If no session is found, the user is offline
-        if (!$session) {
-            return false;
-        }
-
-        // Check if the last_active timestamp is within the last X minutes (e.g., 5 minutes)
-        $lastActive = $session->last_active ? $session->last_active : null;
-        $threshold = Carbon::now()->addMinutes(1); // 1 minutes threshold
-
-        return $lastActive >= $threshold;
-    }
-
     public function edit(): void
     {
         $this->validate();
@@ -131,7 +116,7 @@ class UsersPage extends Component
         is_null($update)
             ? $this->dispatch('notify', title: 'success', message: 'User updated successfully!')
             : $this->dispatch('notify', title: 'failed', message: 'Failed to update user!');
-        $this->dispatch('dispatch-edit-department-saved')->to(UsersPage::class);
+        $this->dispatch('dispatch-edit-user-saved')->to(UsersPage::class);
 
         $this->editUserModal = false;
     }

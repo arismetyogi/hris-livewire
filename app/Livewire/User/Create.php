@@ -23,7 +23,7 @@ class Create extends Component
             : $this->dispatch('notify', title: 'failed', message: 'Data gagal disimpan!');
         $this->createUserModal = false;
         // refresh Users Page after saving
-        $this->dispatch('dispatch-user.create-save')->to(UsersPage::class);
+        $this->dispatch('dispatch-create-user-saved')->to(UsersPage::class);
     }
 
     public function render()

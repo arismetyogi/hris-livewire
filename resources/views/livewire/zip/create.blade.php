@@ -14,7 +14,7 @@
                             wire:model="form.province_code"
                             required>
                         <option disabled value="">Select Province</option>
-                        @foreach(\App\Models\Province::all() as $province)
+                        @foreach(\App\Models\Province::orderBy('name')->get() as $province)
                             <option value="{{ $province->code}}">{{ $province->name }}</option>
                         @endforeach
                     </select>

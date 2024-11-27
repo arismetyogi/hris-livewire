@@ -105,7 +105,7 @@
                                           class="tracking-widest bg-orange-500 hover:bg-orange-400">
                                     <x-heroicon-o-pencil class="h-4 w-4 text-white"/>
                                 </x-button>
-                                <x-danger-button wire:click='confirmZipgDeletion({{ $zip->id }})'>
+                                <x-danger-button wire:click='confirmZipDeletion({{ $zip->id }})'>
                                     <x-heroicon-o-trash class="h-4 w-4 text-white"/>
                                 </x-danger-button>
                             </x-table.cell>

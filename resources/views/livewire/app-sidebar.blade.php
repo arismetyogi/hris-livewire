@@ -61,13 +61,13 @@
                     <!-- Employees -->
                     <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if (in_array(Request::segment(1), ['employees'])) {{
                             'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'
-                        }} @endif" x-data="{ open: {{ in_array(Request::segment(1), ['dashboard']) ? 1 : 0 }} }">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['dashboard'])) {{
+                        }} @endif" x-data="{ open: {{ in_array(Request::segment(1), ['employees']) ? 1 : 0 }} }">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['employees'])) {{
                                 'hover:text-gray-900 dark:hover:text-white'
                             }} @endif" href="#0" @click.prevent="open = !open; sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <svg class="shrink-0 fill-current @if (in_array(Request::segment(1), ['dashboard'])) {{
+                                    <svg class="shrink-0 fill-current @if (in_array(Request::segment(1), ['employees'])) {{
                                             'text-violet-500'
                                         }}@else{{
                                             'text-gray-400 dark:text-gray-500'
@@ -92,21 +92,21 @@
                             </div>
                         </a>
                         <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                            <ul class="pl-8 mt-1 @if (!in_array(Request::segment(1), ['dashboard'])) {{
+                            <ul class="pl-8 mt-1 @if (!in_array(Request::segment(1), ['employees'])) {{
                                     'hidden'
                                 }} @endif" :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
-                                    <a wire:navigate class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if (Route::is('dashboard')) {{
+                                    <a wire:navigate class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if (Route::is('employees')) {{
                                             '!text-violet-500'
-                                        }} @endif" href="{{ route('dashboard') }}">
+                                        }} @endif" href="{{ route('employees') }}">
                                         <span
                                             class="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Employees</span>
                                     </a>
                                 </li>
                                 <li class="mb-1 last:mb-0">
-                                    <a wire:navigate class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if (Route::is('dashboard')) {{
+                                    <a wire:navigate class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if (Route::is('payrolls')) {{
                                             '!text-violet-500'
-                                        }} @endif" href="{{ route('dashboard') }}">
+                                        }} @endif" href="{{ route('payrolls') }}">
                                         <span
                                             class="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Payrolls</span>
                                     </a>
@@ -235,7 +235,7 @@
                                 <li class="mb-1 last:mb-0">
                                     <a wire:navigate class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if (Route::is('dashboard')) {{
                                             '!text-violet-500'
-                                        }} @endif" href="{{ route('dashboard') }}">
+                                        }} @endif" href="{{ route('zips') }}">
                                         <span
                                             class="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">Zip</span>
                                     </a>
