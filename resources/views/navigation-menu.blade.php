@@ -186,8 +186,27 @@
                                    :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link wire:navigate href="{{ route('employees') }}"
+                                   :active="request()->routeIs('employees')">
+                {{ __('Employees') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link wire:navigate href="{{ route('payrolls') }}"
+                                   :active="request()->routeIs('payrolls')">
+                {{ __('Payrolls') }}
+            </x-responsive-nav-link>
         </div>
 
+        <!-- Responsive System Settings -->
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <x-responsive-nav-link wire:navigate href="{{ route('stores') }}"
+                                   :active="request()->routeIs('stores')">
+                {{ __('Stores') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link wire:navigate href="{{ route('users') }}"
+                                   :active="request()->routeIs('users')">
+                {{ __('Users') }}
+            </x-responsive-nav-link>
+        </div>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
