@@ -57,7 +57,7 @@
             <x-table>
                 <x-slot name="head">
                     <x-table.heading></x-table.heading>
-                    <x-table.heading sortable>No</x-table.heading>
+                    {{--                    <x-table.heading sortable>No</x-table.heading>--}}
                     <x-table.heading sortable wire:click="sortBy('first_name')"
                                      :direction="$sortField === 'first_name' ? $sortDirection : null">Name
                     </x-table.heading>
@@ -65,8 +65,7 @@
                                      :direction="$sortField === 'department_name' ? $sortDirection : null">Department
                     </x-table.heading>
                     <x-table.heading sortable>Role</x-table.heading>
-                    <x-table.heading sortable wire:click="sortBy('last_activity')"
-                                     :direction="$sortField === 'last_activity' ? $sortDirection : null">Status
+                    <x-table.heading sortable>Status
                     </x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('users.updated_at')"
                                      :direction="$sortField === 'users.updated_at' ? $sortDirection : null">Last Update
@@ -83,7 +82,7 @@
                                     <label for="checkbox-all-search" class="sr-only">check</label>
                                 </div>
                             </x-table.cell>
-                            <x-table.cell>{{ $users->firstItem() + $loop->index }}</x-table.cell>
+                            {{--                            <x-table.cell>{{ $users->firstItem() + $loop->index }}</x-table.cell>--}}
                             <x-table.cell class="flex">
                                 <img class="w-10 h-10 rounded-full" src="{{ $user->profile_photo_url }}"
                                      alt="{{ $user->username }}"/>
@@ -107,14 +106,15 @@
                                         $lastActive = $session ? $session->last_active : 'offline';
                                     @endphp
                                     @if( $lastActive === 'offline')
-                                        <div class="flex items-center text-orange-600">
-                                            <span class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></span>
+                                        <div class="flex items-center text-red-600">
+                                            <span class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2 "></span>
                                             Offline
                                         </div>
                                     @else
                                         <div class="flex items-center text-green-600">
-                                            <span class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></span>
-                                            Online
+                                            <span
+                                                class="h-2.5 w-2.5 rounded-full animate-ping bg-green-500 mr-2"></span>
+                                            <span>Online</span>
                                         </div>
                                     @endif
                                     <div
