@@ -13,7 +13,6 @@ export default {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.js",
-        "./node_modules/flowbite/**/*.js",
     ],
     darkMode: "class",
     theme: {
@@ -39,12 +38,11 @@ export default {
     plugins: [
         forms,
         typography,
-        require("flowbite/plugin"),
         // add custom variant for expanding sidebar
-        plugin(({ addVariant, e }) => {
-            addVariant("sidebar-expanded", ({ modifySelectors, separator }) => {
+        plugin(({addVariant, e}) => {
+            addVariant("sidebar-expanded", ({modifySelectors, separator}) => {
                 modifySelectors(
-                    ({ className }) =>
+                    ({className}) =>
                         `.sidebar-expanded .${e(
                             `sidebar-expanded${separator}${className}`
                         )}`
