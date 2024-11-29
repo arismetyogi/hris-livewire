@@ -104,7 +104,7 @@
                             <x-table.cell>{{ $zip->updated_at ? $zip->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
                                 <x-button
-                                    wire:click="$dispatch('openModal', { component: 'department-modal', arguments: { department: {{ $zip->id }} }})"
+                                    wire:click="$dispatch('openModal', { component: 'zip.modal', arguments: { zip: {{ $zip->id }} }})"
                                     class="mb-4">
                                     edit
                                 </x-button>
@@ -156,6 +156,6 @@
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>
-        
+
     </div>
 </div>

@@ -24,7 +24,13 @@ class ZipForm extends Form
             'city' => ['required', 'min:5'],
             'subdistrict' => ['required', 'min:5'],
             'urban' => ['required', 'min:5'],
-            'zipcode' => ['required', 'integer', 'digits:5', Rule::unique('zips', ['zipcode', 'urban', 'province_code'])->ignore($this->zip)],
+            'zipcode' => [
+                'required', 'integer', 'digits:5',
+                Rule::unique('zips')->where(function ($query) {
+                    return $query
+                        ->where('urban', $this->urban)
+                        ->where('province_code', $this->province_code);
+                })->ignore($this->zip)],
         ];
     }
 

@@ -7,7 +7,7 @@
         <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
             <!-- ID -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="form.province_code" value="{{ __('Province') }}"/>
+                <x-label for="form.province_code" value="{{ __('Province - Provinsi') }}"/>
                 <select class="block w-full mt-1"
                         wire:model="form.province_code"
                         required>
@@ -21,7 +21,7 @@
 
             <!-- City -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="form.city" value="{{ __('City') }}"/>
+                <x-label for="form.city" value="{{ __('City - Kab/Kota') }}"/>
                 <x-input id="form.city" type="text" class="block w-full mt-1" wire:model="form.city"
                          autocomplete="zip.city"/>
                 <x-input-error for="form.city" class="mt-2"/>
@@ -29,7 +29,7 @@
 
             <!-- Subdistrict -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="form.subdistrict" value="{{ __('Subdistrict') }}"/>
+                <x-label for="form.subdistrict" value="{{ __('Subdistrict - Kecamatan') }}"/>
                 <x-input id="form.subdistrict" type="text" class="block w-full mt-1" wire:model="form.subdistrict"
                          autocomplete="zip.subdistrict"/>
                 <x-input-error for="form.subdistrict" class="mt-2"/>
@@ -37,7 +37,7 @@
 
             <!-- Urban -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="form.urban" value="{{ __('Urban') }}"/>
+                <x-label for="form.urban" value="{{ __('Urban - Kelurahan') }}"/>
                 <x-input id="form.urban" type="text" class="block w-full mt-1" wire:model="form.urban"
                          autocomplete="zip.urban"/>
                 <x-input-error for="form.urban" class="mt-2"/>
@@ -45,7 +45,7 @@
 
             <!-- Zipcode -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="form.zipcode" value="{{ __('Zip Code') }}"/>
+                <x-label for="form.zipcode" value="{{ __('Zip Code - Kode Pos') }}"/>
                 <x-input id="form.zipcode" type="text" class="block w-full mt-1" wire:model="form.zipcode"
                          autocomplete="zip.zipcode"/>
                 <x-input-error for="form.zipcode" class="mt-2"/>
