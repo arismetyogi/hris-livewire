@@ -10,7 +10,7 @@ class Create extends Component
 {
     public UserForm $form;
     public $createUserModal = false;
-    public $formTitle = 'Create a New User';
+    public $formTitle = 'CreateModal a New User';
 
     public function save()
     {

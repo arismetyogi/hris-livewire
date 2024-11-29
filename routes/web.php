@@ -19,7 +19,7 @@ Route::middleware([
 
     Route::get('/departments', \App\Livewire\Department\Index::class)->name('departments');
 
-    Route::get('/provinces', \App\Livewire\ProvincesPage::class)->name('provinces');
+    Route::get('/provinces', \App\Livewire\Province\Index::class)->name('provinces');
 
     Route::get('/zips', \App\Livewire\ZipsPage::class)->name('zips');
 

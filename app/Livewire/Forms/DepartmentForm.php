@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Department;
+use Illuminate\Validation\Rule;
 use Livewire\Form;
 
 class DepartmentForm extends Form
@@ -14,8 +15,10 @@ class DepartmentForm extends Form
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|digits:4|unique:departments,id',
-            'name' => 'required|string|min:3|unique:departments,name',
+            'id' => ['required', 'integer', 'digits:4',
+                Rule::unique('departments', 'id')->ignore($this->department)],
+            'name' => ['required', 'string', 'min:3',
+                Rule::unique('departments', 'name')->ignore($this->department)],
         ];
     }
 

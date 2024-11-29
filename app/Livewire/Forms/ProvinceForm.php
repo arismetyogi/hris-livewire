@@ -3,21 +3,28 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Province;
-use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
 use Livewire\Form;
 
 class ProvinceForm extends Form
 {
-    public ?Province $province;
+    public ?Province $province = null;
 
-    #[Validate('unique:provinces', as: 'Province Name')]
-    public $name;
-    #[Validate('unique:provinces', as: 'Province Code')]
-    public $code;
-    #[Validate('string|min:3', as: 'Province Name (EN)')]
-    public $name_en;
+    public $name, $code, $name_en;
 
-    public function setProvince(Province $province): void
+    public function rules(): array
+    {
+        return [
+            'name' => ['required', 'string', 'min:3', 'max:255',
+                Rule::unique('provinces', 'name')->ignore($this->province)],
+            'name_en' => ['required', 'string', 'min:3', 'max:255',
+                Rule::unique('provinces', 'name_en')->ignore($this->province)],
+            'code' => ['required', 'integer', 'digits:2',
+                Rule::unique('provinces', 'code')->ignore($this->province)],
+        ];
+    }
+
+    public function setProvince(?Province $province = null): void
     {
         $this->province = $province;
 
@@ -26,14 +33,14 @@ class ProvinceForm extends Form
         $this->code = $province->code;
     }
 
-    public function store(): void
+    public function save(): void
     {
-        Province::create($this->except(['province']));
+        $this->validate();
+        if (!$this->province) {
+            Province::create($this->except(['province']));
+        } else {
+            $this->province->update($this->except(['province', 'code']));
+        }
         $this->reset();
-    }
-
-    public function update(): void
-    {
-        $this->province->update($this->except(['province']));
     }
 }

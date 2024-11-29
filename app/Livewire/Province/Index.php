@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Province;
 
 use App\Livewire\Forms\ProvinceForm;
 use App\Models\Province;
@@ -12,9 +12,8 @@ use Livewire\WithPagination;
 
 #[Title('Provinces')]
 // refresh page on save
-#[On('dispatch-create-province-saved')]
-#[On('dispatch-edit-province-saved')]
-class ProvincesPage extends Component
+#[On('refresh-province-list')]
+class Index extends Component
 {
     use WithPagination;
 
@@ -26,8 +25,9 @@ class ProvincesPage extends Component
         $sortField = 'updated_at',
         $sortDirection = 'desc',
         $confirmingProvinceDeletion = false,
-        $confirmingProvinceAddition = false,
         $editProvinceModal = false;
+
+    protected $queryString = ['search', 'sortField', 'sortDirection'];
 
     public function updatedSearch(): void
     {
@@ -56,7 +56,7 @@ class ProvincesPage extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.provinces-page', [
+        return view('livewire.province.index', [
             'provinces' => $provinces
         ]);
     }
@@ -70,22 +70,5 @@ class ProvincesPage extends Component
     {
         $province->delete();
         $this->confirmingProvinceDeletion = false;
-    }
-
-    public function editProvince(Province $id): void
-    {
-        $this->form->setProvince($id);
-        $this->editProvinceModal = true;
-    }
-
-    public function edit(): void
-    {
-        $this->validate();
-        // panggil method store dari ProvinceForm
-        $update = $this->form->update();
-        is_null($update)
-            ? $this->dispatch('notify', title: 'success', message: 'Province updated successfully!')
-            : $this->dispatch('notify', title: 'failed', message: 'Failed to update province!');
-        $this->dispatch('dispatch-edit-province-saved')->to(ProvincesPage::class);
     }
 }

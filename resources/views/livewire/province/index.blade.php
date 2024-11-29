@@ -49,7 +49,9 @@
                            placeholder="Search for provinces"/>
                 </div>
             </div>
-            <livewire:province.create/>
+            <x-button wire:click="$dispatch('openModal', { component: 'province.create-modal' })" class="mb-4">add new
+                province
+            </x-button>
         </div>
 
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
@@ -84,12 +86,13 @@
                             </x-table.cell>
                             <x-table.cell>{{ $provinces->firstItem() + $loop->index }}</x-table.cell>
                             <x-table.cell>
-                                <x-button wire:click="editProvince({{ $province->id }})" type="button"
-                                          class="tracking-widest bg-orange-500 hover:bg-orange-400">
-                                    <x-heroicon-o-pencil class="h-4 w-4 text-white"/>
+                                <x-button
+                                    wire:click="$dispatch('openModal', { component: 'province.create-modal', arguments: { province: {{ $province->id }} }})"
+                                    class="mb-4">
+                                    edit
                                 </x-button>
                                 <x-danger-button wire:click='confirmProvinceDeletion({{ $province->id }})'>
-                                    <x-heroicon-o-trash class="h-4 w-4 text-white"/>
+                                    delete
                                 </x-danger-button>
                             </x-table.cell>
                             <x-table.cell class="flex">
@@ -143,50 +146,6 @@
                                  wire:loading.attr="disabled">
                     {{ __('Delete Province') }}
                 </x-danger-button>
-            </x-slot>
-        </x-dialog-modal>
-
-        <!-- Edit Province Modal -->
-        <x-dialog-modal id="editProvinceModal" wire:model.live="editProvinceModal" submit="edit">
-            <x-slot name="title">
-                {{ __('Edit Province Details') }}
-            </x-slot>
-
-            <x-slot name="content">
-                <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
-                    <!-- ID -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.code" value="{{ __('Province Code') }}"/>
-                        <x-input id="form.code" type="text" class="block w-full mt-1" wire:model="form.code"
-                                 required autocomplete="province.code"/>
-                        <x-input-error for="form.code" class="mt-2"/>
-                    </div>
-
-                    <!-- Name -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.name" value="{{ __('Province Name') }}"/>
-                        <x-input id="form.name" type="text" class="block w-full mt-1" wire:model="form.name"
-                                 autocomplete="province.name"/>
-                        <x-input-error for="form.name" class="mt-2"/>
-                    </div>
-
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.name_en" value="{{ __('Province Name (EN)') }}"/>
-                        <x-input id="form.name_en" type="text" class="block w-full mt-1" wire:model="form.name_en"
-                                 autocomplete="province.name_en"/>
-                        <x-input-error for="form.name_en" class="mt-2"/>
-                    </div>
-
-                </div>
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-secondary-button wire:click="set('editProvinceModal', false)" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-                <x-button class="ms-3" wire:loading.attr="disabled">
-                    {{ __('Update') }}
-                </x-button>
             </x-slot>
         </x-dialog-modal>
     </div>

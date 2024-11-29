@@ -11,9 +11,11 @@ use Laravel\Jetstream\Contracts\DeletesUsers;
 class DeleteUser implements DeletesUsers
 {
     /**
-     * Create a new action instance.
+     * CreateModal a new action instance.
      */
-    public function __construct(protected DeletesTeams $deletesTeams) {}
+    public function __construct(protected DeletesTeams $deletesTeams)
+    {
+    }
 
     /**
      * Delete the given user.

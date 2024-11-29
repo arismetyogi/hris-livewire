@@ -88,7 +88,7 @@
 
                                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                         <x-dropdown-link wire:navigate href="{{ route('teams.create') }}">
-                                            {{ __('Create New Team') }}
+                                            {{ __('CreateModal New Team') }}
                                         </x-dropdown-link>
                                     @endcan
 
@@ -267,7 +267,7 @@
                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                         <x-responsive-nav-link href="{{ route('teams.create') }}"
                                                :active="request()->routeIs('teams.create')">
-                            {{ __('Create New Team') }}
+                            {{ __('CreateModal New Team') }}
                         </x-responsive-nav-link>
                     @endcan
 

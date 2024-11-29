@@ -11,7 +11,7 @@ class ZipForm extends Form
     public ?Zip $zip = null;
 
     public
-        $province_code,
+        $province_code = '',
         $city,
         $subdistrict,
         $urban,

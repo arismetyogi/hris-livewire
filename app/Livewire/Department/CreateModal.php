@@ -29,7 +29,7 @@ class CreateModal extends ModalComponent
     {
         $this->form->save();
         $this->closeModal();
-        $this->dispatch('refresh-department-list')->to('departments-page');
+        $this->dispatch('refresh-department-list')->to(Index::class);
     }
 
     public function render(): View
