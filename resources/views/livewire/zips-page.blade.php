@@ -80,7 +80,7 @@
                     </x-table.heading>
                     <x-table.heading sortable>Action</x-table.heading>
                 </x-slot>
-                <x-slot name="body">
+                <x-slot name="body" class="content-center">
                     @forelse($zips as $zip)
                         <x-table.row>
                             <x-table.cell>
@@ -104,12 +104,12 @@
                             <x-table.cell>{{ $zip->updated_at ? $zip->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
                                 <x-button
-                                    wire:click="$dispatch('openModal', { component: 'zip.modal', arguments: { zip: {{ $zip->id }} }})"
-                                    class="mb-4">
+                                    wire:click="$dispatch('openModal', { component: 'zip.modal', arguments: { zip: {{ $zip->id }} }})">
                                     edit
                                 </x-button>
-                                <x-danger-button wire:click='confirmZipDeletion({{ $zip->id }})'>
-                                    <x-heroicon-o-trash class="h-4 w-4 text-white"/>
+                                <x-danger-button wire:click='confirmZipDeletion({{ $zip->id }})'
+                                >
+                                    delete
                                 </x-danger-button>
                             </x-table.cell>
                         </x-table.row>

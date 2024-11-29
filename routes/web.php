@@ -1,6 +1,5 @@
 <?php
 
-use App\Livewire\UsersPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,11 +13,11 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', \App\Livewire\Dashboard::class)->name('dashboard');
 
-    Route::get('/users', UsersPage::class)->name('users');
+    Route::get('/users', \App\Livewire\UsersPage::class)->name('users');
 
-    Route::get('/users/{user}', UsersPage::class);
+//    Route::get('/users/{user}', \App\Livewire\UsersPage::class);
 
-    Route::get('/departments', \App\Livewire\DepartmentsPage::class)->name('departments');
+    Route::get('/departments', \App\Livewire\Department\Index::class)->name('departments');
 
     Route::get('/provinces', \App\Livewire\ProvincesPage::class)->name('provinces');
 

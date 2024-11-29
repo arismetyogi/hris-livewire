@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Department;
 
 use App\Models\Department;
 use Illuminate\View\View;
@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 #[Title('Departments')]
 // refresh page on save
 #[On('refresh-department-list')]
-class DepartmentsPage extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -52,7 +52,7 @@ class DepartmentsPage extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.departments-page', [
+        return view('livewire.department.index', [
             'departments' => $departments
         ]);
     }

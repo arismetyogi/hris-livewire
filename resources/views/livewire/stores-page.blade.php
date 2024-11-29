@@ -114,8 +114,7 @@
                             </x-table.cell>
                             <x-table.cell>
                                 <x-button
-                                    wire:click="$dispatch('openModal', { component: 'store-modal', arguments: { store: {{ $store->id  }} }})"
-                                    class="mb-4">
+                                    wire:click="$dispatch('openModal', { component: 'store-modal', arguments: { store: {{ $store->id  }} }})">
                                     edit
                                 </x-button>
                                 <x-danger-button wire:click='confirmStoreDeletion({{ $store->id }})'>

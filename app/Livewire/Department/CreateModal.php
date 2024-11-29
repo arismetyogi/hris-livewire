@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Department;
 
 use App\Livewire\Forms\DepartmentForm;
 use App\Models\Department;
+use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
 
-class DepartmentModal extends ModalComponent
+class CreateModal extends ModalComponent
 {
     public ?Department $department = null;
     public DepartmentForm $form;
@@ -14,7 +15,7 @@ class DepartmentModal extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '6xl';
+        return '2xl';
     }
 
     public function mount(?Department $department = null): void
@@ -31,8 +32,8 @@ class DepartmentModal extends ModalComponent
         $this->dispatch('refresh-department-list')->to('departments-page');
     }
 
-    public function render()
+    public function render(): View
     {
-        return view('livewire.department-modal');
+        return view('livewire.department.create-modal');
     }
 }

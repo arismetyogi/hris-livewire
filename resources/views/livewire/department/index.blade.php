@@ -49,7 +49,7 @@
                            placeholder="Search for departments"/>
                 </div>
             </div>
-            <x-button wire:click="$dispatch('openModal', { component: 'department-modal' })" class="mb-4">
+            <x-button wire:click="$dispatch('openModal', { component: 'department.create-modal' })" class="mb-4">
                 add new department
             </x-button>
         </div>
@@ -92,7 +92,7 @@
                             <x-table.cell>{{ $department->updated_at ? $department->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
                                 <x-button
-                                    wire:click="$dispatch('openModal', { component: 'department-modal', arguments: { department: {{ $department->id }} }})"
+                                    wire:click="$dispatch('openModal', { component: 'department.create-modal', arguments: { department: {{ $department->id }} }})"
                                     class="mb-4">
                                     edit
                                 </x-button>
