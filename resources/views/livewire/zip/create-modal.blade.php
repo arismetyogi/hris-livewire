@@ -1,6 +1,6 @@
 <div class="p-6">
     <div class="flex mt-3 mb-5 justify-center font-semibold text-xl">
-        @if(!$this->province)
+        @if(!$this->zip)
             Add a New {{ $formTitle }}
         @else
             Edit {{ $formTitle }}
@@ -57,6 +57,8 @@
             </div>
 
         </div>
+
+        <hr class="mt-3">
 
         <div class="mt-6">
             <x-button class="ms-3" wire:loading.attr="disabled">

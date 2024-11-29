@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Store;
 
 use App\Livewire\Forms\StoreForm;
 use App\Models\Store;
 use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
 
-class StoreModal extends ModalComponent
+class CreateModal extends ModalComponent
 {
     public ?Store $store = null;
     public StoreForm $form;
+    public $formTitle = 'Store';
 
     public static function modalMaxWidth(): string
     {
@@ -28,11 +29,11 @@ class StoreModal extends ModalComponent
     {
         $this->form->save();
         $this->closeModal();
-        $this->dispatch('refresh-store-list')->to('stores-page');
+        $this->dispatch('refresh-store-list')->to(Index::class);
     }
 
     public function render(): View
     {
-        return view('livewire.store-modal');
+        return view('livewire.store.create-modal');
     }
 }

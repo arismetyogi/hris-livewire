@@ -6,7 +6,7 @@
             Edit {{ $formTitle }}
         @endif
     </div>
-    
+
     <form wire:submit="save">
         <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
             <!-- ID -->
@@ -32,7 +32,9 @@
             </div>
 
         </div>
+
         <hr class="mt-3">
+
         <div class="mt-9 flex mb-3 justify-center font-semibold">
             <x-button class="ms-3" wire:loading.attr="disabled">
                 {{ __('Save') }}

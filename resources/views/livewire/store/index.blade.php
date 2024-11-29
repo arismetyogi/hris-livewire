@@ -49,7 +49,7 @@
                            placeholder="Search for users"/>
                 </div>
             </div>
-            <x-button wire:click="$dispatch('openModal', { component: 'StoreModal' })" class="mb-4">
+            <x-button wire:click="$dispatch('openModal', { component: 'store.create-modal' })" class="mb-4">
                 Add New Store
             </x-button>
         </div>
@@ -114,10 +114,11 @@
                             </x-table.cell>
                             <x-table.cell>
                                 <x-button
-                                    wire:click="$dispatch('openModal', { component: 'store-modal', arguments: { store: {{ $store->id  }} }})">
+                                    wire:click="$dispatch('openModal', { component: 'store.create-modal', arguments: { store: {{ $store->id  }} }})">
                                     edit
                                 </x-button>
-                                <x-danger-button wire:click='confirmStoreDeletion({{ $store->id }})'>
+                                <x-danger-button
+                                    wire:click="$dispatch('openModal', { component: 'delete-modal', arguments: {model: 'Store', recordId: {{ $store->id}} }})">
                                     delete
                                 </x-danger-button>
                             </x-table.cell>
@@ -145,26 +146,7 @@
                 {{ $stores->links() }}
             </div>
         </div>
-        <!-- Delete Store CreateModal -->
-        <x-dialog-modal wire:model.live="confirmingStoreDeletion">
-            <x-slot name="title">
-                {{ __('Delete Store') }}
-            </x-slot>
 
-            <x-slot name="content">
-                {{ __('Are you sure you want to permanently delete this store?') }}
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-secondary-button wire:click="set('confirmingStoreDeletion', false)" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3" wire:click="deleteStore({{ $confirmingStoreDeletion }})"
-                                 wire:loading.attr="disabled">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
-            </x-slot>
-        </x-dialog-modal>
     </div>
+
 </div>

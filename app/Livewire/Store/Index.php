@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Store;
 
 use App\Models\Store;
 use Illuminate\View\View;
@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 #[Title("Stores")]
 #[On('refresh-store-list')]
 #[On('recordDeleted')]
-class StoresPage extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -20,8 +20,7 @@ class StoresPage extends Component
         $search = '',
         $perPage = '5',
         $sortField = 'stores.outlet_sap_id',
-        $sortDirection = 'asc',
-        $confirmingStoreDeletion = false;
+        $sortDirection = 'asc';
 
     protected $queryString = ['search', 'sortField', 'sortDirection'];
 
@@ -56,20 +55,9 @@ class StoresPage extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.stores-page', [
+        return view('livewire.store.index', [
             'stores' => $stores
         ]);
-    }
-
-    public function confirmStoreDeletion($id): void
-    {
-        $this->confirmingStoreDeletion = $id;
-    }
-
-    public function deleteStore(Store $store): void
-    {
-        $store->delete();
-        $this->confirmingStoreDeletion = false;
     }
 
 }

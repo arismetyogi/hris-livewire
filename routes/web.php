@@ -15,17 +15,15 @@ Route::middleware([
 
     Route::get('/users', \App\Livewire\User\Index::class)->name('users');
 
-//    Route::get('/users/{user}', \App\Livewire\Index::class);
-
     Route::get('/departments', \App\Livewire\Department\Index::class)->name('departments');
 
     Route::get('/provinces', \App\Livewire\Province\Index::class)->name('provinces');
 
     Route::get('/zips', \App\Livewire\Zip\Index::class)->name('zips');
 
-    Route::get('/stores', \App\Livewire\StoresPage::class)->name('stores');
+    Route::get('/stores', \App\Livewire\Store\Index::class)->name('stores');
 
-    Route::get('/employees', \App\Livewire\EmployeesPage::class)->name('employees');
+    Route::get('/employees', \App\Livewire\Employee\Index::class)->name('employees');
 
     Route::get('/payrolls', \App\Livewire\PayrollsPage::class)->name('payrolls');
 });
