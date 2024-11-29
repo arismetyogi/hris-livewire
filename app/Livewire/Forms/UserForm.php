@@ -14,18 +14,14 @@ class UserForm extends Form
     #[Locked]
     public $id;
 //    #[Validate('required|unique:users,username,' . $id . '|min:6', as: 'Username')]
-    public $username;
-//    #[Validate('required|min:6', as: 'First Name')]
-    public $first_name;
-//    #[Validate(as: 'Last Name')]
-    public $last_name;
-//    #[Validate('required|email|unique:users,email,' . $id . '|min:6', as: 'Email')]
-    public $email;
-//    #[Validate('required', as: 'Department')]
-    public $department_id="";
-//    #[Validate('required|min:8', as: 'Password')]
-    public $password="";
-    public $password_confirmation="";
+    public
+        $username,
+        $first_name,
+        $last_name,
+        $email,
+        $department_id = null,
+        $password = null,
+        $password_confirmation = null;
 
     public function rules(): array
     {

@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
 //            ProvinceSeeder::class,
 //            ZipSeeder::class,
-//            StoreSeeder::class,
+            StoreSeeder::class,
         ]);
     }
 }

@@ -8,7 +8,7 @@ use Livewire\Form;
 
 class ZipForm extends Form
 {
-    public ?ZipForm $form;
+    public ?Zip $zip;
 
     #[Validate('unique:zips', as: 'Urban')]
     public $urban;

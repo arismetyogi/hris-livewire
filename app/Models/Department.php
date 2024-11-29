@@ -13,4 +13,9 @@ class Department extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function stores(): HasMany
+    {
+        return $this->hasmany(Store::class);
+    }
 }
