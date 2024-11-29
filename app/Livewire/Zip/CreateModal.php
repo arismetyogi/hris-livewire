@@ -6,7 +6,7 @@ use App\Livewire\Forms\ZipForm;
 use App\Models\Zip;
 use LivewireUI\Modal\ModalComponent;
 
-class Modal extends ModalComponent
+class CreateModal extends ModalComponent
 {
     public ?Zip $zip = null;
     public ZipForm $form;
@@ -28,11 +28,11 @@ class Modal extends ModalComponent
     {
         $this->form->save();
         $this->closeModal();
-        $this->dispatch('refresh-zip-list')->to('zips-page');
+        $this->dispatch('refresh-zip-list')->to('zip-list');
     }
 
     public function render()
     {
-        return view('livewire.zip.modal');
+        return view('livewire.zip.create-modal');
     }
 }

@@ -96,7 +96,8 @@
                                     class="mb-4">
                                     edit
                                 </x-button>
-                                <x-danger-button wire:click='confirmDepartmentDeletion({{ $department->id }})'>
+                                <x-danger-button
+                                    wire:click="$dispatch('openModal', { component: 'delete-modal', arguments: {model: 'Department', recordId: {{ $department->id}} }})">
                                     delete
                                 </x-danger-button>
                             </x-table.cell>
@@ -122,27 +123,7 @@
                 {{ $departments->links() }}
             </div>
         </div>
-        <!-- Delete Department Modal -->
-        <x-dialog-modal wire:model.live="confirmingDepartmentDeletion">
-            <x-slot name="title">
-                {{ __('Delete Department') }}
-            </x-slot>
 
-            <x-slot name="content">
-                {{ __('Are you sure you want to permanently delete this department?') }}
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-secondary-button wire:click="set('confirmingDepartmentDeletion', false)"
-                                    wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3" wire:click="deleteDepartment({{ $confirmingDepartmentDeletion }})"
-                                 wire:loading.attr="disabled">
-                    {{ __('Delete Department') }}
-                </x-danger-button>
-            </x-slot>
-        </x-dialog-modal>
     </div>
+    
 </div>

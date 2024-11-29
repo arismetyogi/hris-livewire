@@ -96,7 +96,7 @@
         </div>
     @endif
 
-    <!-- Token Value Modal -->
+    <!-- Token Value CreateModal -->
     <x-dialog-modal wire:model.live="displayingToken">
         <x-slot name="title">
             {{ __('API Token') }}
@@ -121,7 +121,7 @@
         </x-slot>
     </x-dialog-modal>
 
-    <!-- API Token Permissions Modal -->
+    <!-- API Token Permissions CreateModal -->
     <x-dialog-modal wire:model.live="managingApiTokenPermissions">
         <x-slot name="title">
             {{ __('API Token Permissions') }}
@@ -149,7 +149,7 @@
         </x-slot>
     </x-dialog-modal>
 
-    <!-- Delete Token Confirmation Modal -->
+    <!-- Delete Token Confirmation CreateModal -->
     <x-confirmation-modal wire:model.live="confirmingApiTokenDeletion">
         <x-slot name="title">
             {{ __('Delete API Token') }}

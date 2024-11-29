@@ -49,7 +49,7 @@
                            placeholder="Search for zips"/>
                 </div>
             </div>
-            <x-button wire:click="$dispatch('openModal', { component: 'zip.modal' })" class="mb-4">
+            <x-button wire:click="$dispatch('openModal', { component: 'zip.create-modal' })" class="mb-4">
                 add new zipcode
             </x-button>
         </div>
@@ -104,11 +104,11 @@
                             <x-table.cell>{{ $zip->updated_at ? $zip->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
                                 <x-button
-                                    wire:click="$dispatch('openModal', { component: 'zip.modal', arguments: { zip: {{ $zip->id }} }})">
+                                    wire:click="$dispatch('openModal', { component: 'zip.create-modal', arguments: { zip: {{ $zip->id }} }})">
                                     edit
                                 </x-button>
-                                <x-danger-button wire:click='confirmZipDeletion({{ $zip->id }})'
-                                >
+                                <x-danger-button
+                                    wire:click="$dispatch('openModal', { component: 'delete-modal', arguments: {model: 'Zip', recordId: {{ $zip->id}} }})">
                                     delete
                                 </x-danger-button>
                             </x-table.cell>
@@ -134,28 +134,7 @@
                 {{ $zips->links() }}
             </div>
         </div>
-        <!-- Delete Province Modal -->
-        <x-dialog-modal wire:model.live="confirmingZipDeletion">
-            <x-slot name="title">
-                {{ __('Delete Zip') }}
-            </x-slot>
-
-            <x-slot name="content">
-                {{ __('Are you sure you want to permanently delete this zip?') }}
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-secondary-button wire:click="set('confirmingZipDeletion', false)"
-                                    wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3" wire:click="deleteZip({{ $confirmingZipDeletion }})"
-                                 wire:loading.attr="disabled">
-                    {{ __('Delete Zip') }}
-                </x-danger-button>
-            </x-slot>
-        </x-dialog-modal>
 
     </div>
+
 </div>

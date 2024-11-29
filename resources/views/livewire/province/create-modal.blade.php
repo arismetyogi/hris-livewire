@@ -9,14 +9,12 @@
     <form wire:submit="save">
         <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
             <!-- ID -->
-            @if(!$this->province)
-                <div class="col-span-6 sm:col-span-4">
-                    <x-label for="form.code" value="{{ __('Province Code') }}"/>
-                    <x-input id="form.code" type="text" class="block w-full mt-1" wire:model="form.code"
-                             required autocomplete="province.code"/>
-                    <x-input-error for="form.code" class="mt-2"/>
-                </div>
-            @endif
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="form.code" value="{{ __('Province Code') }}"/>
+                <x-input id="form.code" type="text" class="block w-full mt-1" wire:model="form.code"
+                         required autocomplete="province.code" :disabled="$this->province"/>
+                <x-input-error for="form.code" class="mt-2"/>
+            </div>
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">

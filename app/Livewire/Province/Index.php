@@ -13,6 +13,7 @@ use Livewire\WithPagination;
 #[Title('Provinces')]
 // refresh page on save
 #[On('refresh-province-list')]
+#[On('recordDeleted')]
 class Index extends Component
 {
     use WithPagination;

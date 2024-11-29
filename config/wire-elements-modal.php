@@ -28,7 +28,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Modal Component Defaults
+    | CreateModal Component Defaults
     |--------------------------------------------------------------------------
     |
     | Configure the default properties for a modal component.

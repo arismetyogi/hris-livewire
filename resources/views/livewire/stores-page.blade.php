@@ -145,7 +145,7 @@
                 {{ $stores->links() }}
             </div>
         </div>
-        <!-- Delete Store Modal -->
+        <!-- Delete Store CreateModal -->
         <x-dialog-modal wire:model.live="confirmingStoreDeletion">
             <x-slot name="title">
                 {{ __('Delete Store') }}

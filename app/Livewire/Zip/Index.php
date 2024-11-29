@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Zip;
 
 use App\Livewire\Forms\ZipForm;
 use App\Models\Zip;
@@ -13,7 +13,8 @@ use Livewire\WithPagination;
 #[Title('Zip Codes')]
 // refresh page on save
 #[On('refresh-zip-list')]
-class ZipsPage extends Component
+#[On('recordDeleted')]
+class Index extends Component
 {
     use WithPagination;
 
@@ -62,7 +63,7 @@ class ZipsPage extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.zips-page', [
+        return view('livewire.zip.index', [
             'zips' => $zips
         ]);
     }
@@ -77,5 +78,5 @@ class ZipsPage extends Component
         $zip->delete();
         $this->confirmingZipDeletion = false;
     }
-    
+
 }

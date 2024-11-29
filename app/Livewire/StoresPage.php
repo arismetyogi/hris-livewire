@@ -11,6 +11,7 @@ use Livewire\WithPagination;
 
 #[Title("Stores")]
 #[On('refresh-store-list')]
+#[On('recordDeleted')]
 class StoresPage extends Component
 {
     use WithPagination;

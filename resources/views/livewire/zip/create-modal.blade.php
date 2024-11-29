@@ -10,7 +10,8 @@
                 <x-label for="form.province_code" value="{{ __('Province - Provinsi') }}"/>
                 <select class="block w-full mt-1"
                         wire:model="form.province_code"
-                        required>
+                        required
+                        @if($this->zip) disabled @endif>
                     <option disabled value="">Select Province</option>
                     @foreach(\App\Models\Province::orderBy('name')->get() as $province)
                         <option value="{{ $province->code}}">{{ $province->name }}</option>

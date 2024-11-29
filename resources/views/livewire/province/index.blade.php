@@ -87,11 +87,11 @@
                             <x-table.cell>{{ $provinces->firstItem() + $loop->index }}</x-table.cell>
                             <x-table.cell>
                                 <x-button
-                                    wire:click="$dispatch('openModal', { component: 'province.create-modal', arguments: { province: {{ $province->id }} }})"
-                                    class="mb-4">
+                                    wire:click="$dispatch('openModal', { component: 'province.create-modal', arguments: { province: {{ $province->id }} }})">
                                     edit
                                 </x-button>
-                                <x-danger-button wire:click='confirmProvinceDeletion({{ $province->id }})'>
+                                <x-danger-button
+                                    wire:click="$dispatch('openModal', { component: 'delete-modal', arguments: {model: 'Province', recordId: {{ $province->id}} }})">
                                     delete
                                 </x-danger-button>
                             </x-table.cell>
@@ -126,27 +126,7 @@
                 {{ $provinces->links() }}
             </div>
         </div>
-        <!-- Delete Province Modal -->
-        <x-dialog-modal wire:model.live="confirmingProvinceDeletion">
-            <x-slot name="title">
-                {{ __('Delete Province') }}
-            </x-slot>
 
-            <x-slot name="content">
-                {{ __('Are you sure you want to permanently delete this province?') }}
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-secondary-button wire:click="set('confirmingProvinceDeletion', false)"
-                                    wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3" wire:click="deleteProvince({{ $confirmingProvinceDeletion }})"
-                                 wire:loading.attr="disabled">
-                    {{ __('Delete Province') }}
-                </x-danger-button>
-            </x-slot>
-        </x-dialog-modal>
     </div>
+
 </div>

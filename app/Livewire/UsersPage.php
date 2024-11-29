@@ -14,8 +14,8 @@ use Livewire\WithPagination;
 
 #[Title('Users')]
 // refresh page on save
-#[On('dispatch-create-user-saved')]
-#[On('dispatch-edit-user-saved')]
+#[On('refresh-user-list')]
+#[On('recordDeleted')]
 class UsersPage extends Component
 {
     use WithPagination;
