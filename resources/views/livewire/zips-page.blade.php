@@ -49,7 +49,9 @@
                            placeholder="Search for zips"/>
                 </div>
             </div>
-            <livewire:zip.create/>
+            <x-button wire:click="$dispatch('openModal', { component: 'zip.modal' })" class="mb-4">
+                add new zipcode
+            </x-button>
         </div>
 
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
@@ -101,9 +103,10 @@
                             <x-table.cell>{{ $zip->zipcode }}</x-table.cell>
                             <x-table.cell>{{ $zip->updated_at ? $zip->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
-                                <x-button wire:click="editZip({{ $zip->id }})" type="button"
-                                          class="tracking-widest bg-orange-500 hover:bg-orange-400">
-                                    <x-heroicon-o-pencil class="h-4 w-4 text-white"/>
+                                <x-button
+                                    wire:click="$dispatch('openModal', { component: 'department-modal', arguments: { department: {{ $zip->id }} }})"
+                                    class="mb-4">
+                                    edit
                                 </x-button>
                                 <x-danger-button wire:click='confirmZipDeletion({{ $zip->id }})'>
                                     <x-heroicon-o-trash class="h-4 w-4 text-white"/>
@@ -153,73 +156,6 @@
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>
-
-        <!-- Edit Zip Modal -->
-        <x-dialog-modal id="editZipModal" wire:model.live="editZipModal" submit="edit">
-            <x-slot name="title">
-                {{ __('Edit Zip Details') }}
-            </x-slot>
-
-            <x-slot name="content">
-                <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
-                    <!-- ID -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.province_code" value="{{ __('Province') }}"/>
-                        <select class="block w-full mt-1"
-                                wire:model="form.province_code"
-                                required>
-                            <option disabled value="">Select Province</option>
-                            @foreach(\App\Models\Province::all() as $province)
-                                <option value="{{ $province->code}}">{{ $province->name }}</option>
-                            @endforeach
-                        </select>
-                        <x-input-error for="form.province_code" class="mt-2"/>
-                    </div>
-
-                    <!-- Urban -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.urban" value="{{ __('Urban') }}"/>
-                        <x-input id="form.urban" type="text" class="block w-full mt-1" wire:model="form.urban"
-                                 autocomplete="zip.urban"/>
-                        <x-input-error for="form.urban" class="mt-2"/>
-                    </div>
-
-                    <!-- Subdistrict -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.subdistrict" value="{{ __('Subdistrict') }}"/>
-                        <x-input id="form.subdistrict" type="text" class="block w-full mt-1" wire:model="form.subdistrict"
-                                 autocomplete="zip.subdistrict"/>
-                        <x-input-error for="form.subdistrict" class="mt-2"/>
-                    </div>
-
-                    <!-- City -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.city" value="{{ __('City') }}"/>
-                        <x-input id="form.city" type="text" class="block w-full mt-1" wire:model="form.city"
-                                 autocomplete="zip.city"/>
-                        <x-input-error for="form.city" class="mt-2"/>
-                    </div>
-
-                    <!-- Zipcode -->
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="form.zipcode" value="{{ __('Zip Code') }}"/>
-                        <x-input id="form.zipcode" type="text" class="block w-full mt-1" wire:model="form.zipcode"
-                                 autocomplete="zip.zipcode"/>
-                        <x-input-error for="form.zipcode" class="mt-2"/>
-                    </div>
-
-                </div>
-
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-secondary-button wire:click="set('editZipModal', false)" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-                <x-button class="ms-3" wire:loading.attr="disabled">
-                    {{ __('Update') }}
-                </x-button>
-            </x-slot>
-        </x-dialog-modal>
+        
     </div>
 </div>
