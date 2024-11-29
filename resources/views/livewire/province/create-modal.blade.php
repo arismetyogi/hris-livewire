@@ -6,6 +6,7 @@
             Edit {{ $formTitle }}
         @endif
     </div>
+    
     <form wire:submit="save">
         <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">
             <!-- ID -->

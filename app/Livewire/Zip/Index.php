@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Zip;
 
-use App\Livewire\Forms\ZipForm;
 use App\Models\Zip;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
@@ -17,8 +16,6 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
-
-    public ZipForm $form;
 
     public
         $search = '',
@@ -66,17 +63,6 @@ class Index extends Component
         return view('livewire.zip.index', [
             'zips' => $zips
         ]);
-    }
-
-    public function confirmZipDeletion($id): void
-    {
-        $this->confirmingZipDeletion = $id;
-    }
-
-    public function deleteZip(Zip $zip): void
-    {
-        $zip->delete();
-        $this->confirmingZipDeletion = false;
     }
 
 }

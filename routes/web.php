@@ -13,9 +13,9 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', \App\Livewire\Dashboard::class)->name('dashboard');
 
-    Route::get('/users', \App\Livewire\UsersPage::class)->name('users');
+    Route::get('/users', \App\Livewire\User\Index::class)->name('users');
 
-//    Route::get('/users/{user}', \App\Livewire\UsersPage::class);
+//    Route::get('/users/{user}', \App\Livewire\Index::class);
 
     Route::get('/departments', \App\Livewire\Department\Index::class)->name('departments');
 

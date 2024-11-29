@@ -1,7 +1,11 @@
 <div class="p-6">
-    <x-slot name="title">
-        {{ $formTitle }}
-    </x-slot>
+    <div class="flex mt-3 mb-5 justify-center font-semibold text-xl">
+        @if(!$this->province)
+            Add a New {{ $formTitle }}
+        @else
+            Edit {{ $formTitle }}
+        @endif
+    </div>
 
     <form wire:submit="save">
         <div class="grid grid-cols-12 gap-4 sm:grid-cols-8">

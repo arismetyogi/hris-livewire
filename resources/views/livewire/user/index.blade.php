@@ -49,7 +49,9 @@
                            placeholder="Search for users"/>
                 </div>
             </div>
-            <livewire:user.create/>
+            <x-button wire:click="$dispatch('openModal', { component: 'user.create-modal' })" class="mb-4">add new
+                user
+            </x-button>
         </div>
 
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">

@@ -9,19 +9,18 @@ use Livewire\Form;
 
 class UserForm extends Form
 {
-    public ?User $user;
+    public ?User $user = null;
 
     #[Locked]
     public $id;
-//    #[Validate('required|unique:users,username,' . $id . '|min:6', as: 'Username')]
     public
         $username,
         $first_name,
         $last_name,
         $email,
         $department_id = null,
-        $password = null,
-        $password_confirmation = null;
+        $password = '',
+        $password_confirmation = '';
 
     public function rules(): array
     {
@@ -40,7 +39,7 @@ class UserForm extends Form
         ];
     }
 
-    public function setUser(User $user): void
+    public function setUser(?User $user = null): void
     {
         $this->user = $user;
 
@@ -52,14 +51,14 @@ class UserForm extends Form
         $this->password = $user->password;
     }
 
-    public function store(): void
+    public function save(): void
     {
-        User::create($this->except(['user']));
+        $this->validate();
+        if (!$this->user) {
+            User::create($this->except(['user']));
+        } else {
+            $this->user->update($this->except(['user']));
+        }
         $this->reset();
-    }
-
-    public function update(): void
-    {
-        $this->user->update($this->except(['user']));
     }
 }

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\User;
 
-use App\Livewire\Forms\UserForm;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -16,20 +15,15 @@ use Livewire\WithPagination;
 // refresh page on save
 #[On('refresh-user-list')]
 #[On('recordDeleted')]
-class UsersPage extends Component
+class Index extends Component
 {
     use WithPagination;
-
-    public UserForm $form;
 
     public
         $search = '',
         $perPage = '5',
         $sortField = 'users.updated_at',
-        $sortDirection = 'desc',
-        $confirmingUserDeletion = false,
-        $confirmingUserAddition = false,
-        $editUserModal = false;
+        $sortDirection = 'desc';
 
     protected $queryString = ['search', 'sortField', 'sortDirection'];
 
@@ -64,28 +58,9 @@ class UsersPage extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.users-page', [
+        return view('livewire.user.index', [
             'users' => $users
         ]);
-    }
-
-    public function confirmUserDeletion($id): void
-    {
-        $this->confirmingUserDeletion = $id;
-    }
-
-    public function deleteUser(User $user): void
-    {
-        $user->delete();
-        $this->confirmingUserDeletion = false;
-    }
-
-    public function editUser(User $id): void
-    {
-        $this->form->setUser($id);
-        $this->form->password = '';
-        $this->form->password_confirmation = '';
-        $this->editUserModal = true;
     }
 
     public function getSessionsProperty()
@@ -109,16 +84,4 @@ class UsersPage extends Component
         });
     }
 
-    public function edit(): void
-    {
-        $this->validate();
-        // panggil method store dari UserForm
-        $update = $this->form->update();
-        is_null($update)
-            ? $this->dispatch('notify', title: 'success', message: 'User updated successfully!')
-            : $this->dispatch('notify', title: 'failed', message: 'Failed to update user!');
-        $this->dispatch('dispatch-edit-user-saved')->to(UsersPage::class);
-
-        $this->editUserModal = false;
-    }
 }
