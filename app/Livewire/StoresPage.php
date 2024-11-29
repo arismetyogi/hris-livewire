@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Models\Store;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Title("Stores")]
 #[On('refresh-store-list')]
 class StoresPage extends Component
 {

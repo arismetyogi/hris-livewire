@@ -49,7 +49,9 @@
                            placeholder="Search for departments"/>
                 </div>
             </div>
-            <livewire:department.create/>
+            <x-button wire:click="$dispatch('openModal', { component: 'department-modal' })" class="mb-4">
+                add new department
+            </x-button>
         </div>
 
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
@@ -89,13 +91,12 @@
                             <x-table.cell>{{ $department->name ? $department->name : null }}</x-table.cell>
                             <x-table.cell>{{ $department->updated_at ? $department->updated_at->diffForHumans() : null }}</x-table.cell>
                             <x-table.cell>
-                                <x-button wire:click="editDepartment({{ $department->id }})" type="button"
-                                          class="tracking-widest bg-orange-500 hover:bg-orange-400">
-                                    <x-heroicon-o-user-circle class="h-4 w-4 text-white"/>
+                                <x-button
+                                    wire:click="$dispatch('openModal', { component: 'department-modal', arguments: { department: {{ $department->id }} }})"
+                                    class="mb-4">
                                     edit
                                 </x-button>
                                 <x-danger-button wire:click='confirmDepartmentDeletion({{ $department->id }})'>
-                                    <x-heroicon-c-user-minus class="h-4 w-4 text-white"/>
                                     delete
                                 </x-danger-button>
                             </x-table.cell>

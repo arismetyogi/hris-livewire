@@ -12,6 +12,11 @@ class StoreModal extends ModalComponent
     public ?Store $store = null;
     public StoreForm $form;
 
+    public static function modalMaxWidth(): string
+    {
+        return '2xl';
+    }
+
     public function mount(?Store $store = null): void
     {
         if ($store && $store->exists) {

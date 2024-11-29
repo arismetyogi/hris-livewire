@@ -14,7 +14,7 @@ class StoreForm extends Form
         $department_id,
         $outlet_sap_id,
         $name,
-        $store_type,
+        $store_type = 'NONE',
         $operational_date,
         $address,
         $phone,

@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Forms\DepartmentForm;
 use App\Models\Department;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
@@ -12,22 +11,19 @@ use Livewire\WithPagination;
 
 #[Title('Departments')]
 // refresh page on save
-#[On('dispatch-create-department-saved')]
-#[On('dispatch-edit-department-saved')]
+#[On('refresh-department-list')]
 class DepartmentsPage extends Component
 {
     use WithPagination;
-
-    public DepartmentForm $form;
 
     public
         $search = '',
         $perPage = '5',
         $sortField = 'updated_at',
         $sortDirection = 'desc',
-        $confirmingDepartmentDeletion = false,
-        $confirmingDepartmentAddition = false,
-        $editDepartmentModal = false;
+        $confirmingDepartmentDeletion = false;
+
+    protected $queryString = ['search', 'sortField', 'sortDirection'];
 
     public function updatedSearch(): void
     {
@@ -72,20 +68,4 @@ class DepartmentsPage extends Component
         $this->confirmingDepartmentDeletion = false;
     }
 
-    public function editDepartment(Department $id): void
-    {
-        $this->form->setDepartment($id);
-        $this->editDepartmentModal = true;
-    }
-
-    public function edit(): void
-    {
-        $this->validate();
-        // panggil method store dari DepartmentForm
-        $update = $this->form->update();
-        is_null($update)
-            ? $this->dispatch('notify', title: 'success', message: 'Department updated successfully!')
-            : $this->dispatch('notify', title: 'failed', message: 'Failed to update department!');
-        $this->dispatch('dispatch-edit-department-saved')->to(DepartmentsPage::class);
-    }
 }

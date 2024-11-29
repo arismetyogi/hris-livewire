@@ -3,19 +3,23 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Department;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class DepartmentForm extends Form
 {
-    public ?Department $department;
+    public ?Department $department = null;
 
-    #[Validate('unique:departments', as: 'Department ID')]
-    public $id;
-    #[Validate('string|min:3', as: 'Department Name')]
-    public $name;
+    public $id, $name;
 
-    public function setDepartment(Department $department): void
+    public function rules(): array
+    {
+        return [
+            'id' => 'required|integer|digits:4|unique:departments,id',
+            'name' => 'required|string|min:3|unique:departments,name',
+        ];
+    }
+
+    public function setDepartment(?Department $department = null): void
     {
         $this->department = $department;
 
@@ -23,14 +27,15 @@ class DepartmentForm extends Form
         $this->name = $department->name;
     }
 
-    public function store(): void
+    public function save(): void
     {
-        Department::create($this->except(['department']));
+        $this->validate();
+        if (!$this->department) {
+            Department::create($this->except(['department']));
+        } else {
+            $this->department->update($this->except(['department']));
+        }
         $this->reset();
     }
 
-    public function update(): void
-    {
-        $this->department->update($this->except(['department']));
-    }
 }
