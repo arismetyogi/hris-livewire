@@ -55,7 +55,6 @@
         </div>
 
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
-            <div class="text-secondary-500 font-semibold text-xl my-4 py-4 px-8">Zips</div>
             <x-table>
                 <x-slot name="head">
                     <x-table.heading></x-table.heading>

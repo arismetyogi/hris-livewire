@@ -27,10 +27,41 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex sm:items-center">
+                    <div class="relative ms-3">
+                        <x-dropdown align="right" width="60">
+                            <x-slot name="trigger">
+                            <span class="inline-flex rounded-md items-center">
+                                <button type="button" wire:navigate
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50">
+                                    Employee Management
+                                    <svg class="ms-2 -me-0.5 h-3 w-3" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 512 512">
+                                        <path
+                                            d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
+                                    </svg>
+                                </button>
+                            </span>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <div class="w-60">
+                                    <!-- Employee Management -->
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                        {{ __('Manage Employee') }}
+                                    </div>
+
+                                    <!-- Employee Settings -->
+                                    <x-dropdown-link wire:navigate href="{{ route('employees') }}">
+                                        {{ __('Employees') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link wire:navigate href="{{ route('payrolls') }}">
+                                        {{ __('Payrolls') }}
+                                    </x-dropdown-link>
+                                </div>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
                     <x-nav-link href="{{ route('departments') }}" :active="request()->routeIs('departments')"
                                 wire:navigate>
                         {{ __('Departments') }}
@@ -88,7 +119,7 @@
 
                                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                         <x-dropdown-link wire:navigate href="{{ route('teams.create') }}">
-                                            {{ __('CreateModal New Team') }}
+                                            {{ __('New Team') }}
                                         </x-dropdown-link>
                                     @endcan
 
@@ -202,6 +233,15 @@
 
         <!-- Responsive System Settings -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="flex items-center px-4">
+                <div class="shrink-0 me-3">
+                    System Settings
+                </div>
+            </div>
+            <x-responsive-nav-link wire:navigate href="{{ route('departments') }}"
+                                   :active="request()->routeIs('departments')">
+                {{ __('Departments') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link wire:navigate href="{{ route('stores') }}"
                                    :active="request()->routeIs('stores')">
                 {{ __('Stores') }}
@@ -217,12 +257,12 @@
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 me-3">
                         <img class="object-cover w-10 h-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}"
-                             alt="{{ Auth::user()->name }}"/>
+                             alt="{{ Auth::user()->first_name . ' ' . auth()->user()->last_name }}"/>
                     </div>
                 @endif
 
                 <div>
-                    <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="text-base font-medium text-gray-800">{{ Auth::user()->username }}</div>
                     <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
             </div>
