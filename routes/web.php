@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,6 +15,7 @@ Route::middleware([
     Route::get('/dashboard', \App\Livewire\Dashboard::class)->name('dashboard');
 
     Route::get('/users', \App\Livewire\User\Index::class)->name('users');
+    Route::get('/users-export', UserController::class . '@export')->name('user.export');
 
     Route::get('/departments', \App\Livewire\Department\Index::class)->name('departments');
 

@@ -34,7 +34,6 @@
                             User</a>
                     </div>
                 </div>
-
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 flex items-center pointer-events-none rtl:inset-r-0 start-0 ps-3">
@@ -49,9 +48,14 @@
                            placeholder="Search for users"/>
                 </div>
             </div>
-            <x-button wire:click="$dispatch('openModal', { component: 'user.create-modal' })" class="mb-4">add new
-                user
-            </x-button>
+            <div class="flex justify-end mb-4 gap-x-4">
+                <x-secondary-button>
+                    <a href="{{ route('user.export')}}">Export</a>
+                </x-secondary-button>
+                <x-button wire:click="$dispatch('openModal', { component: 'user.create-modal' })">add new
+                    user
+                </x-button>
+            </div>
         </div>
 
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
@@ -59,7 +63,7 @@
                 <x-slot name="head">
                     {{--                    <x-table.heading sortable>No</x-table.heading>--}}
                     <x-table.heading sortable wire:click="sortBy('first_name')"
-                                     :direction="$sortField === 'first_name' ? $sortDirection : null">Name
+                                     :direction="'first_name' ? $sortDirection : null">Name
                     </x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('department_name')"
                                      :direction="$sortField === 'department_name' ? $sortDirection : null">Department
