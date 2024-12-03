@@ -57,7 +57,6 @@
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
             <x-table>
                 <x-slot name="head">
-                    <x-table.heading></x-table.heading>
                     <x-table.heading sortable>No</x-table.heading>
                     <x-table.heading sortable wire:click="sortBy('id')"
                                      :direction="$sortField === 'id' ? $sortDirection : null">Department ID
@@ -73,13 +72,6 @@
                 <x-slot name="body">
                     @forelse($departments as $department)
                         <x-table.row>
-                            <x-table.cell>
-                                <div class="flex items-center">
-                                    <input id="checkbox-all-search" type="checkbox"
-                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                                    <label for="checkbox-all-search" class="sr-only">check</label>
-                                </div>
-                            </x-table.cell>
                             <x-table.cell>{{ $departments->firstItem() + $loop->index }}</x-table.cell>
                             <x-table.cell class="flex">
                                 <div class="ps-3">
