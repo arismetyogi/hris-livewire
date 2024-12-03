@@ -25,5 +25,5 @@ Route::middleware([
 
     Route::get('/employees', \App\Livewire\Employee\Index::class)->name('employees');
 
-    Route::get('/payrolls', \App\Livewire\PayrollsPage::class)->name('payrolls');
+    Route::get('/payrolls', \App\Livewire\Payroll\Index::class)->name('payrolls');
 });
