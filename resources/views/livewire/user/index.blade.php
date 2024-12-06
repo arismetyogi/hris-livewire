@@ -23,7 +23,7 @@
             </div>
             <div class="flex justify-end mb-4 gap-x-4">
                 <x-secondary-button>
-                    <a href="{{ route('user.export')}}" class="flex gap-2">
+                    <a href="{{ route('user.export') }}" class="flex gap-2">
                         export
                         <x-heroicon-o-document-arrow-down class="w-4 h-4"/>
                     </a>

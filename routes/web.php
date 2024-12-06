@@ -24,6 +24,7 @@ Route::middleware([
     Route::get('/zips', \App\Livewire\Zip\Index::class)->name('zips');
 
     Route::get('/stores', \App\Livewire\Store\Index::class)->name('stores');
+    Route::get('/stores-export', \App\Http\Controllers\StoreController::class . '@export')->name('store.export');
 
     Route::get('/employees', \App\Livewire\Employee\Index::class)->name('employees');
 

@@ -21,9 +21,17 @@
                            placeholder="Search for users"/>
                 </div>
             </div>
-            <x-button wire:click="$dispatch('openModal', { component: 'store.create-modal' })" class="mb-4">
-                Add New Store
-            </x-button>
+            <div class="flex justify-end mb-4 gap-x-4">
+                <x-secondary-button>
+                    <a href="{{ route('store.export') }}" class="flex gap-2">
+                        export
+                        <x-heroicon-o-document-arrow-down class="w-4 h-4"/>
+                    </a>
+                </x-secondary-button>
+                <x-button wire:click="$dispatch('openModal', { component: 'store.create-modal' })">
+                    Add New Store
+                </x-button>
+            </div>
         </div>
 
         <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
