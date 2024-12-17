@@ -15,14 +15,14 @@
     @livewireStyles
 </head>
 
-<body class="antialiased text-gray-600 bg-gray-100 font-inter dark:bg-gray-900 dark:text-gray-400"
+<body class="antialiased text-gray-600 bg-gray-100 font-inter dark:bg-gray-800 dark:text-gray-400"
       :class="{ 'sidebar-expanded': sidebarExpanded }"
       x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
       x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))">
 
 <x-banner/>
 
-<div class="flex min-h-screen bg-gray-100">
+<div class="flex min-h-screen bg-gray-100 dark:bg-gray-800 dark:border-gray-700 items-center">
     <livewire:app-sidebar/>
     <div class="relative flex flex-col flex-1 @if ($attributes['background']) {{
                     $attributes['background']

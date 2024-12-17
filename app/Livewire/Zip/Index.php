@@ -4,6 +4,7 @@ namespace App\Livewire\Zip;
 
 use App\Models\Zip;
 use Illuminate\View\View;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -13,6 +14,7 @@ use Livewire\WithPagination;
 // refresh page on save
 #[On('refresh-zip-list')]
 #[On('recordDeleted')]
+#[Layout('layouts.admin')]
 class Index extends Component
 {
     use WithPagination;

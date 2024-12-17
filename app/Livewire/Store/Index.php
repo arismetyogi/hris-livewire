@@ -4,6 +4,7 @@ namespace App\Livewire\Store;
 
 use App\Models\Store;
 use Illuminate\View\View;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -12,6 +13,7 @@ use Livewire\WithPagination;
 #[Title("Stores")]
 #[On('refresh-store-list')]
 #[On('recordDeleted')]
+#[Layout('layouts.admin')]
 class Index extends Component
 {
     use WithPagination;

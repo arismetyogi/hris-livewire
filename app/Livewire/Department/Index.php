@@ -4,6 +4,7 @@ namespace App\Livewire\Department;
 
 use App\Models\Department;
 use Illuminate\View\View;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -12,6 +13,7 @@ use Livewire\WithPagination;
 #[Title('Departments')]
 // refresh page on save
 #[On('refresh-department-list')]
+#[Layout('layouts.admin')]
 class Index extends Component
 {
     use WithPagination;

@@ -12,7 +12,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', \App\Livewire\Dashboard::class)->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('livewire.dashboard');
+    })->name('dashboard');
 
     Route::get('/users', \App\Livewire\User\Index::class)->name('users');
     Route::get('/users-export', UserController::class . '@export')->name('user.export');

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -15,6 +16,7 @@ use Livewire\WithPagination;
 // refresh page on save
 #[On('refresh-user-list')]
 #[On('recordDeleted')]
+#[Layout('layouts.admin')]
 class Index extends Component
 {
     use WithPagination;
