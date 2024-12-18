@@ -27,9 +27,12 @@ class StoreController extends Controller
      */
     public function import(Request $request, Excel $excel)
     {
-//        dd($request->file('file'));
+        $request->validate([
+            'file' => 'required|file|mimes:csv,xlsx|max:2048',
+        ]);
+        // dd($request->file('file'));
         $excel->import(new StoreImport, $request->file('file'), null, Excel::XLSX);
-        return back()->with('success', 'Store Imported Successfully.');
+        return back()->with('success', 'File imported successfully.');
     }
 
     public function uniqueBy()

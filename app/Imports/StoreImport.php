@@ -6,6 +6,7 @@ use App\Models\Store;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class StoreImport implements ToModel, WithHeadingRow
 {
@@ -15,12 +16,19 @@ class StoreImport implements ToModel, WithHeadingRow
      */
     public function model(array $row): Store
     {
+        $excelDate = $row['tanggal_operasional'];
+
+        // Convert the Excel date or parse the string
+        $operationalDate = is_numeric($excelDate)
+            ? Carbon::instance(Date::excelToDateTimeObject($excelDate))
+            : Carbon::createFromFormat('m/d/Y', $excelDate);
+
         return new Store([
             'department_id' => $row['kode_bm'],
             'outlet_sap_id' => $row['kode_apotek'],
             'name' => $row['nama_apotek'],
             'store_type' => $row['type_store'],
-            'operational_date' => Carbon::parse($row['tanggal_operasional']),
+            'operational_date' => $operationalDate,
             'phone' => $row['no_telp'],
             'latitude' => $row['latitude'],
             'longitude' => $row['longitude'],

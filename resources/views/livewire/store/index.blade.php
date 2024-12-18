@@ -24,9 +24,15 @@
             <div class="flex justify-end mb-4 gap-x-4">
                 <form action="{{ route('store.import') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="file" name="file">
-                    <x-secondary-button type="submit" value="Import">Import</x-secondary-button>
+                    <input type="file" name="file" class="form-control @error('file') is-invalid @enderror">
+                    <x-secondary-button type="submit" value="Import">
+                        import
+                        <x-heroicon-o-document-arrow-up class="w-4 h-4"/>
+                    </x-secondary-button>
                 </form>
+                @error('file')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
                 <x-secondary-button>
                     <a href="{{ route('store.export') }}" class="flex gap-2">
                         export
@@ -104,7 +110,7 @@
                         <tr class=" bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50
                                           dark:hover:bg-gray-600
                                 ">
-                            <td class="px-6 py-4">No User Found!</td>
+                            <td class="px-6 py-4">No Oulet Found!</td>
                         </tr>
                     @endforelse
                 </x-slot>
