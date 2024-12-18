@@ -10,9 +10,9 @@
     </div>
     <h1 class="pr-4 w-fill justify-self-end text-lg font-medium text-gray-600">
         <!-- Authentication -->
-        <x-secondary-button wire:click="logout" class="flex items-center gap-1 hover:bg-red-100">
+        <x-danger-button wire:click="logout" class="flex items-center gap-1 hover:bg-red-100">
             <x-heroicon-o-arrow-left-on-rectangle class="size-4"/>
             {{ __('Log Out') }}
-        </x-secondary-button>
+        </x-danger-button>
     </h1>
 </div>

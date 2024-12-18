@@ -18,7 +18,7 @@
          class="transform -translate-x-full lg:translate-x-0 transition-all duration-300 fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:end-auto lg:bottom-0 dark:bg-gray-800 dark:border-gray-700 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500">
         <div class="px-6">
             <a href="{{ route('dashboard') }}"
-               class="flex items-center gap-2 text-xl font-semibold dark:text-white">
+               class="flex items-center gap-2 text-xl font-semibold text-primary-500 dark:text-primary-100 ">
                 <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                 <span>{{ config('app.name') }}</span>
             </a>
@@ -40,7 +40,7 @@
                 </x-sidebar-nav-link>
                 <x-sidebar-nav-group label="System Settings"
                                      :active="request()->routeIs('departments', 'stores', 'zips')"
-                                     icon="heroicon-o-cog">
+                                     icon="heroicon-m-cog">
                     <x-sidebar-nav-link :href="route('departments')" :active="request()->routeIs('departments')"
                                         icon="heroicon-o-academic-cap">
                         Departments
@@ -56,7 +56,7 @@
                 </x-sidebar-nav-group>
                 <x-sidebar-nav-group label="User Settings"
                                      :active="request()->routeIs('users')"
-                                     icon="heroicon-o-user-group">
+                                     icon="heroicon-m-user-group">
                     <x-sidebar-nav-link :href="route('users')" :active="request()->routeIs('users')"
                                         icon="heroicon-o-user-group">
                         Users
@@ -66,6 +66,14 @@
                         My Profile
                     </x-sidebar-nav-link>
                 </x-sidebar-nav-group>
+            </ul>
+            <ul>
+                <button wire:click="logout" class="w-52 text-start content-center fixed bottom-4">
+                    <x-sidebar-nav-link class="flex items-center gap-4 font-semibold text-red-600">
+                        <x-heroicon-o-arrow-left-start-on-rectangle class="size-6"/>
+                        {{ __('Log Out') }}
+                    </x-sidebar-nav-link>
+                </button>
             </ul>
         </nav>
     </div>

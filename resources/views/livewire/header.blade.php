@@ -16,13 +16,13 @@ new class extends Component {
                     <a href="{{ route('dashboard') }}"
                        class="flex items-center gap-2 text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                         <x-application-logo
-                            class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200 lg:hidden"/>
+                            class="block h-9 w-auto fill-current text-primary-800 dark:text-primary-200 lg:hidden"/>
                         <span>{{ config('app.name') }}</span>
                     </a>
                 </div>
                 <div class="lg:w-full flex items-center justify-end ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
                     <div class="hidden lg:block">
-                        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        <h2 class="font-semibold text-xl text-primary-800 dark:text-primary-200 leading-tight">
                             {{ $title }}
                         </h2>
                     </div>

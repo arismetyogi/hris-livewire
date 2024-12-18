@@ -11,7 +11,7 @@
         'dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300' => !$active
     ])}}>
         @if($icon)
-            @svg($icon, 'flex-shrink-0 size-4')
+            @svg($icon, 'flex-shrink-0 size-5 text-primary-500 dark:text-primary-100')
         @endif
         {{ $slot }}
     </a>
