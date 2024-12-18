@@ -27,6 +27,7 @@ Route::middleware([
 
     Route::get('/stores', \App\Livewire\Store\Index::class)->name('stores');
     Route::get('/stores-export', \App\Http\Controllers\StoreController::class . '@export')->name('store.export');
+    Route::post('/store-import', \App\Http\Controllers\StoreController::class . '@import')->name('store.import');
 
     Route::get('/employees', \App\Livewire\Employee\Index::class)->name('employees');
 

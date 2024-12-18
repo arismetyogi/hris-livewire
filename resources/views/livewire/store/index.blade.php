@@ -22,6 +22,11 @@
                 </div>
             </div>
             <div class="flex justify-end mb-4 gap-x-4">
+                <form action="{{ route('store.import') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="file">
+                    <x-secondary-button type="submit" value="Import">Import</x-secondary-button>
+                </form>
                 <x-secondary-button>
                     <a href="{{ route('store.export') }}" class="flex gap-2">
                         export
